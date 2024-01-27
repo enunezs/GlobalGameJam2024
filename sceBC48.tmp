@@ -1,18 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://bdruj37nppf2s"]
 
-[ext_resource type="Texture2D" uid="uid://d3fiaiehupgu4" path="res://Character/Assets/temporary_background.png" id="1_cy0nb"]
 [ext_resource type="PackedScene" uid="uid://736jrfei3td6" path="res://Character/character_body_2d.tscn" id="1_gvg3c"]
 [ext_resource type="Texture2D" uid="uid://dvtwe57fos71f" path="res://Enemies/Temp/STROOP-_Bully.png" id="2_cat5q"]
 [ext_resource type="Script" path="res://Enemies/Enemy.gd" id="3_vyiyh"]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_gvg3c")]
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_gvg3c")]
 position = Vector2(209, 130)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
-[node name="CollisionPolygon2D" type="Area2D" parent="StaticBody2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(826, 620, 1070, 618, 1051, 370, 995, 468, 1017, 526)
 
 [node name="Enemy" type="CharacterBody2D" parent="."]
 

@@ -139,8 +139,6 @@ func follow(delta):
 	set_velocity(cur_speed)	
 	move_and_slide()	
 
-
-
 	# If unset, set target time
 
 	# Transition OUT
@@ -148,8 +146,6 @@ func follow(delta):
 		state = State.IDLE
 		state_transition = true
 	
-
-
 func slip(delta):
 	# Transition IN
 	if state_transition:

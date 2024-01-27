@@ -74,7 +74,7 @@ func _process(delta):
 		State.DEAD:
 			die()
 		State.BOUNCE:
-			pass
+			bounce(delta)
 			
 		State.SLIP:
 			slip(delta)
@@ -97,21 +97,6 @@ func idle():
 		state = State.PREPARE_TO_ATTACK	
 
 	
-
-func player_hit():
-	# Transition IN
-	if state_transition:
-		state_transition = false
-		target_time = 3.0
-		current_time =0.0
-	set_velocity(Vector2(0,0))
-
-	move_and_slide()	
-	
-	# Transition OUT
-	if target_time < current_time:
-		state_transition = true
-		state = State.IDLE
 
 
 func prepare_to_attack(): 
@@ -144,23 +129,27 @@ func prepare_to_attack():
 		state_transition = true
 		state = State.FOLLOW
 
+func player_hit(player_direction):
+	# Transition IN
+	state_transition = true
+	cur_speed = speed * -player_direction.normalized()/2
+	# Transition OUT
+	state = State.BOUNCE
+
+		
 func bounce(delta):
 	# Transition IN
 	if state_transition:
 		state_transition = false
 		target_time = bounce_time
 		current_time =0.0
-		direction = -direction.normalized()
-		cur_speed = speed * direction 
+	var percent = current_time / target_time
+	print("Current speed: " + str(cur_speed))
 
-	cur_speed = cur_speed * 0.9
-
-		# Move along previous fixed direction
-
-	set_velocity(cur_speed)	
+	set_velocity(cur_speed * (1.0 - percent))
 	move_and_slide()	
-
-	# If unset, set target time
+	
+	# Move along previous fixed direction
 
 	# Transition OUT
 	if target_time < current_time:

@@ -223,13 +223,11 @@ func stunned(delta):
 		state = State.MOVE
 		state_transition = true
 	
-	
 func die():
 	print("Player died")
 
 	hit.emit()
 	#queue_free()
-
 
 func update_animation():
 	# flip sprite
@@ -255,11 +253,7 @@ func update_animation():
 	else:
 		animated_sprite.play("Idle")
 
-
-
-
 ### External signals
-
 # Check for items
 func _on_area_2d_area_entered(area):
 	#print("Area name: " + area.get_parent().name)
@@ -282,7 +276,7 @@ func _on_area_2d_body_entered(body):
 		state = State.STUNNED
 		hit_direction = (get_global_position()- body.get_global_position()).normalized()
 		state_transition = true
-		body.player_hit()		
+		body.player_hit(hit_direction)		
 			
 
 # on click

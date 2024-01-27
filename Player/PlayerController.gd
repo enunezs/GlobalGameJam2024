@@ -27,11 +27,15 @@ enum State {IDLE, MOVE, CARRYING, THROWING, STUNNED, DEAD}
 # DEAD
 signal hit
 
-# Member variables
-var current_time: float = 0.0
-var target_time: float = 0.0
-
+# STUNNED
 var stunned_time: float = 1.0
+var stun_velocity: float = 1000.0
+var stun_decay = 0.5
+
+# Member variables
+var _current_time: float = 0.0
+var _target_time: float = 0.0
+
 
 var state = State.MOVE # start state
 var item = null # item being carried
@@ -54,11 +58,11 @@ func _physics_process(delta):
 	# print enemy state in text
 	#print("State: " + str(state))
 	
-	current_time += delta
+	_current_time += delta
 
 	#print current and target time
-	#print("Current time: " + str(current_time))
-	#print("Target time: " + str(target_time))
+	#print("Current time: " + str(_current_time))
+	#print("Target time: " + str(_target_time))
 
 	
 	match state:
@@ -124,7 +128,7 @@ func _on_area_2d_body_entered(body):
 	if body.is_in_group("Enemy"):
 		state = State.STUNNED
 		hit_direction = (get_global_position()- body.get_global_position()).normalized()
-		target_time = current_time + stunned_time
+		_target_time = _current_time + stunned_time
 			
 
 # on click
@@ -181,11 +185,12 @@ func throwing():
 
 func stunned(delta):
 
-	velocity = hit_direction * 100
+	# Apply stun velocity
+	velocity = hit_direction * stun_velocity
 	global_position += velocity * delta
 
 	# If unset, set target time
-	if target_time < current_time:
+	if _target_time < _current_time:
 		state = State.MOVE
 
 

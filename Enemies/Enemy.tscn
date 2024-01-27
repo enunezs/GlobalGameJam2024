@@ -13,152 +13,20 @@ shader_parameter/inside = false
 shader_parameter/add_margins = true
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2t0cb"]
-radius = 11.1718
-height = 110.743
+radius = 6.95131
+height = 70.2791
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_03tmy"]
-radius = 77.0584
+radius = 60.208
+
+[sub_resource type="Animation" id="Animation_ctdeh"]
+length = 0.001
 
 [sub_resource type="Animation" id="Animation_bntuj"]
 resource_name = "Run"
 length = 1.44445
 loop_mode = 1
 step = 0.0111111
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.13853, 2.5, 32.5, -0.172735, 44.5, 0.188853, -1, 1.5, -0.108213, 4, 0.25, 0, -6.10964, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.342162, 0.663769, 1)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 36.5, -0.0640903, -3, 0.132525, 28, 6.15862, -0.0836253, -0.658624, 0.25, 0, -1.45101, -0.0626618, -11.049, 0.25, 0, -1.45101, -0.136013, -0.0489879, 0.0712528, -0.0489879),
-"times": PackedFloat32Array(0, 0.388889, 0.663769, 0.914173, 1)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.344969, -0.25, 0, 0.25, 0, 0.344969, -0.25, 0, 0.25, 0, -0.153686, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.390289, 0.697933, 0.914173, 1)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D:scale:x")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
-"points": PackedFloat32Array(0.359999, -0.25, 0, 0.25, 0, 0.305892, -0.25, 0, 0.25, 0, 0.393161, -0.25, 0, 0.25, 0, 0.411531, -0.25, 0, 0.25, 0, 0.304, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.390289, 0.697933, 0.914173, 1)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite2D:scale:y")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
-"points": PackedFloat32Array(0.359999, -0.25, 0, 0.25, 0, 0.45175, -0.25, 0, 0.25, 0, 0.494067, -0.25, 0, 0.25, 0, 0.487944, -0.25, 0, 0.25, 0, 0.36, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.390289, 0.697933, 0.914173, 1)
-}
-tracks/5/type = "bezier"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite2D:skew")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.390289)
-}
-
-[sub_resource type="Animation" id="Animation_ctdeh"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D:scale:x")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0.359999, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite2D:scale:y")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0.359999, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/5/type = "bezier"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite2D:skew")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qrgug"]
 _data = {
@@ -171,11 +39,11 @@ script = ExtResource("2_vrnss")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_1vhei")
-scale = Vector2(0.359999, 0.359999)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_tcc0s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-15, 16)
+position = Vector2(1, 3)
 scale = Vector2(8.05603, 0.939113)
 shape = SubResource("CapsuleShape2D_2t0cb")
 
@@ -184,7 +52,7 @@ position = Vector2(-13, -3)
 scale = Vector2(1.2, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BananaSensorArea2D"]
-position = Vector2(1, 18)
+position = Vector2(10.8333, 3)
 shape = SubResource("CircleShape2D_03tmy")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

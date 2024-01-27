@@ -6,11 +6,12 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_ktb51"]
 radius = 182.011
 
-[node name="Banana" type="CharacterBody2D"]
+[node name="Banana" type="CharacterBody2D" groups=["Item"]]
 script = ExtResource("1_rqrue")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
+position = Vector2(-1.90735e-06, -5)
+scale = Vector2(0.057874, 0.057874)
 texture = ExtResource("2_ggeik")
 
 [node name="Area2D" type="Area2D" parent="."]

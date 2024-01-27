@@ -6,7 +6,7 @@
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_gvg3c")]
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_gvg3c")]
 position = Vector2(209, 130)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

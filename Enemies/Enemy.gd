@@ -93,5 +93,3 @@ func follow(delta):
 	if target_time < current_time:
 		target_time = current_time + idle_time
 		state = State.IDLE
-
-

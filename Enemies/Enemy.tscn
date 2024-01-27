@@ -6,6 +6,11 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1vhei"]
 shader = ExtResource("2_opp5o")
+shader_parameter/color = Vector4(1, 1, 1, 1)
+shader_parameter/width = 8.282
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2t0cb"]
 radius = 11.1718

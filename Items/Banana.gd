@@ -38,5 +38,11 @@ func throw(dir):
 	thrown = true
 	#print("Direction is: " + str(direction))
 	
+
+
+func _on_area_2d_area_entered(area):
+	if area.is_in_group("Scenario"):
+		destroy()
+		
 func destroy():
 	queue_free()

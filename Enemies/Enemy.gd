@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-enum State {IDLE, PREPARE_TO_ATTACK, FOLLOW, SLIP}
+enum State {IDLE, PREPARE_TO_ATTACK, FOLLOW, SLIP, DEAD}
 
 # Declare member variables here. Break down per state
 # IDLE
@@ -12,6 +12,9 @@ var prepare_time = 1.5
 # FOLLOW
 var speed = 500
 var follow_time = 1.0
+
+# DEAD
+signal hit
 
 # SLIP
 var slip_time = 3.0
@@ -58,9 +61,11 @@ func _process(delta):
 			prepare_to_attack()
 		State.FOLLOW:
 			follow(delta)
+		State.DEAD:
+			die()
+			
 		State.SLIP:
 			slip(delta)
-		
 
 func idle():
 	# Play idle animation
@@ -110,6 +115,12 @@ func follow(delta):
 		target_time = current_time + idle_time
 		state = State.IDLE
 
+
+	
+func die():
+	hit.emit()
+	queue_free()
+
 func slip(delta):
 
 
@@ -138,3 +149,5 @@ func _on_banana_sensor_area_2d_area_entered(area):
 		target_time = current_time + slip_time
 		# TODO 
 		area.get_parent().destroy()
+	if area.is_in_group("Scenario"):
+		state = State.DEAD

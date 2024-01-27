@@ -29,7 +29,7 @@ enum State {IDLE, MOVE, CARRYING, THROWING, STUNNED, DEAD}
 var current_time: float = 0.0
 var target_time: float = 0.0
 
-var stunned_time: float = 3.0
+var stunned_time: float = 1.0
 
 var state = State.MOVE # start state
 var item = null # item being carried
@@ -69,7 +69,7 @@ func _physics_process(delta):
 		State.THROWING:
 			throw()
 		State.STUNNED:
-			stunned()
+			stunned(delta)
 	
 func move(delta):
 	
@@ -115,7 +115,7 @@ func _on_area_2d_body_entered(body):
 	print("Body name: " + body.name)
 	if body.name == "Enemy":
 		state = State.STUNNED
-		hit_direction = (body.get_parent().get_global_position() - get_global_position()).normalized()
+		hit_direction = (get_global_position()- body.get_global_position()).normalized()
 		target_time = current_time + stunned_time
 			
 
@@ -173,9 +173,6 @@ func throw():
 
 func stunned(delta):
 
-	if current_time > 1:
-		state = State.MOVE
-		current_time = 0
 
 
 	velocity = hit_direction * 100
@@ -183,8 +180,8 @@ func stunned(delta):
 
 	# If unset, set target time
 	if target_time < current_time:
-		target_time = current_time + idle_time
-		state = State.IDLE
+		state = State.MOVE
+
 
 
 	pass # Replace with function body.

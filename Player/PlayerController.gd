@@ -28,15 +28,15 @@ enum State {IDLE, MOVE, CARRYING, THROWING, STUNNED, DEAD}
 signal hit
 
 # STUNNED
-var stunned_time: float = 1.0
-var stun_velocity: float = 1000.0
-var stun_decay = 0.5
+@export var stunned_time: float = 2.0
+@export var stun_velocity: float = 1500.0
+#var stun_decay = 0.5
 
 # Member variables
-var _current_time: float = 0.0
-var _target_time: float = 0.0
+@export var _current_time: float = 0.0
+@export var _target_time: float = 0.0
 
-
+var state_transition : bool = true # is state transitioning
 var state = State.MOVE # start state
 var item = null # item being carried
 var item_holding = false # is player item_holding an item
@@ -44,6 +44,7 @@ var direction = Vector2() # direction to player
 var last_mouse_pos = Vector2.RIGHT # last mouse position
 var hit_direction
 
+@onready var animation_player = $AnimatedSprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready(): 
@@ -52,6 +53,12 @@ func _ready():
 	if object_holder == null:
 		print("Player not found")
 		return
+	if animation_player == null:
+		print("Animation player not found")
+		return
+
+	state = State.MOVE
+	state_transition = true
 
 
 func _physics_process(delta):
@@ -78,8 +85,18 @@ func _physics_process(delta):
 			stunned(delta)
 		State.DEAD:
 			die()
+
+	# update animation
+	update_animation() 
+
 	
+### State: MOVE
 func move(delta):
+	if state_transition:
+		state_transition = false
+		velocity = Vector2.ZERO
+		_target_time = 0.0
+		_current_time = 0.0
 	
 	axis = get_input_axis()
 	if axis == Vector2.ZERO:
@@ -95,7 +112,6 @@ func get_input_axis():
 	axis.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	axis.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
 	return axis.normalized()
-	
 
 func apply_friction(amount):
 	if velocity.length() > amount:
@@ -106,6 +122,102 @@ func apply_friction(amount):
 func apply_movement(accel):
 	velocity += accel
 	velocity = velocity.limit_length(MAX_SPEED)
+
+
+### State: CARRYING
+func pick_up():
+	state_transition = false
+
+
+	# set item as child of object holder
+	item_holding = true
+	var old_transform = item.global_transform
+	item.get_parent().remove_child(item)
+	add_child(item)
+	item.global_transform = old_transform
+	# set item as kinematic
+	# set item position to object holder position
+	item.position = object_holder.position
+	#item.set_physics_process(false)
+	state = State.MOVE
+	
+func throwing():
+	state_transition = false
+
+	#print("Throwing") 
+	item_holding = false
+	# Disown the child
+	# Unparent item, preserve position 
+	
+	var old_transform = item.global_transform
+	remove_child(item)
+	get_parent().add_child(item)
+	item.global_transform = old_transform
+
+	# throw item
+	# set item as not kinematic
+	# set item velocity to direction
+	item.set_physics_process(true)
+
+	# add force
+	direction = (last_mouse_pos - get_global_position()).normalized()
+	item.throw(direction)
+
+	item = null
+
+
+	state = State.MOVE
+	pass # Replace with function body.
+
+func stunned(delta):
+	# transition IN
+	if state_transition:
+		state_transition = false
+		_target_time = stunned_time
+		_current_time = 0.0
+
+	var percent = _current_time / _target_time
+
+	# Apply stun velocity, slow down with time
+	velocity = hit_direction * stun_velocity * (1.0 - percent)
+	move_and_slide()
+	#global_position += velocity * delta	
+
+	# transition OUT
+	if _target_time < _current_time:
+		state = State.MOVE
+		state_transition = true
+	
+	
+func die():
+	hit.emit()
+	queue_free()
+
+
+func update_animation():
+	# flip sprite
+	if velocity.x != 0:
+		animation_player.flip_h = velocity.x < 0
+
+	if state == State.MOVE:
+		animation_player.play("Run")
+	elif state == State.CARRYING:
+		animation_player.play("Hold")
+	elif state == State.THROWING:
+		pass
+		#animation_player.play("throw")
+	elif state == State.STUNNED:
+		animation_player.play("Slide")
+	elif state == State.DEAD:
+		pass
+		#animation_player.play("dead")
+	else:
+		animation_player.play("Idle")
+
+
+
+
+### External signals
 
 # Check for items
 func _on_area_2d_area_entered(area):
@@ -143,60 +255,3 @@ func _input(event):
 			if item_holding:
 				state = State.THROWING
 
-
-func pick_up():
-	# set item as child of object holder
-	item_holding = true
-	var old_transform = item.global_transform
-	item.get_parent().remove_child(item)
-	add_child(item)
-	item.global_transform = old_transform
-	# set item as kinematic
-	# set item position to object holder position
-	item.position = object_holder.position
-	#item.set_physics_process(false)
-	state = State.MOVE
-	
-func throwing():
-	#print("Throwing") 
-	item_holding = false
-	# Disown the child
-	# Unparent item, preserve position 
-	
-	var old_transform = item.global_transform
-	remove_child(item)
-	get_parent().add_child(item)
-	item.global_transform = old_transform
-
-	# throw item
-	# set item as not kinematic
-	# set item velocity to direction
-	item.set_physics_process(true)
-
-	# add force
-	direction = (last_mouse_pos - get_global_position()).normalized()
-	item.throw(direction)
-
-	item = null
-
-
-	state = State.MOVE
-	pass # Replace with function body.
-
-func stunned(delta):
-
-	# Apply stun velocity
-	velocity = hit_direction * stun_velocity
-	global_position += velocity * delta
-
-	# If unset, set target time
-	if _target_time < _current_time:
-		state = State.MOVE
-
-
-	pass # Replace with function body.
-	
-	
-func die():
-	hit.emit()
-	queue_free()

@@ -1,34 +1,98 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwqkxnj1ajr43"]
+[gd_scene load_steps=10 format=3 uid="uid://cwqkxnj1ajr43"]
 
 [ext_resource type="Script" path="res://Player/PlayerController.gd" id="1_1t2qx"]
-[ext_resource type="Texture2D" uid="uid://ct72stj7nl8gt" path="res://Player/icon.svg" id="2_1ij7q"]
+[ext_resource type="Texture2D" uid="uid://b2dsd8r3x0qh2" path="res://Player/Assets/Clown-run.png" id="2_e3yr3"]
+[ext_resource type="Shader" path="res://Outline.gdshader" id="2_swwg2"]
+[ext_resource type="Texture2D" uid="uid://ciumek4o0qi8p" path="res://Player/Assets/Clown-hold.png" id="4_vyv80"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_38xbu"]
+shader = ExtResource("2_swwg2")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 12.136
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_axuq2"]
-radius = 72.0
-height = 144.0
+radius = 204.0
+height = 448.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fsp3i"]
-radius = 44.1814
+radius = 152.053
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pjtso"]
+shader = ExtResource("2_swwg2")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 16.925
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iqtpr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_vyv80")
+}],
+"loop": true,
+"name": &"Hold",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_e3yr3")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_e3yr3")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_vyv80")
+}],
+"loop": true,
+"name": &"Slide",
+"speed": 5.0
+}]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_1t2qx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_1ij7q")
+visible = false
+material = SubResource("ShaderMaterial_38xbu")
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_e3yr3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -36)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CapsuleShape2D_axuq2")
 
 [node name="ItemPosMarker" type="Marker2D" parent="."]
-position = Vector2(-2, -68)
+position = Vector2(12, -162)
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -30)
 shape = SubResource("CircleShape2D_fsp3i")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_pjtso")
+position = Vector2(-10, -30)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_iqtpr")
+animation = &"Idle"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

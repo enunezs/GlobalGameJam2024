@@ -2,7 +2,7 @@ extends Node2D
 
 @export var spawner_enabled: bool = true;
 @export var spawn_target: PackedScene # Target for spawner
-@export var spawn_interval: float = 3.0 # Seconds between spawns
+@export var spawn_interval: float = 7.0 # Seconds between spawns
 @export var spawn_limit: int = 3 # Maximum number of mobs onscreen
 
 var _spawn_speed: float = 1.0 / spawn_interval

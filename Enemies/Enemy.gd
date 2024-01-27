@@ -21,6 +21,7 @@ var slip_time = 3.0
 var slip_speed = 300
 
 # Member variables
+var state_transition : bool = true
 var current_time: float = 0.0
 var target_time: float = 0.0
 var state = State.IDLE # start state
@@ -40,7 +41,9 @@ func _ready():
 		target_time = current_time + idle_time
 		state = State.IDLE
 
-
+	state_transition = true
+	var current_time: float = 0.0
+	var target_time: float = 0.0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -68,21 +71,44 @@ func _process(delta):
 			slip(delta)
 
 func idle():
+	# Transtion IN
+	if state_transition:
+		state_transition = false
+		target_time = idle_time
+		current_time =0.0
+
 	# Play idle animation
 	pass
 	
 	# If time is up, switch to prepare
+
+	# Transition OUT
 	if current_time > target_time:
+		state_transition = true
 		state = State.PREPARE_TO_ATTACK	
-		target_time = current_time + prepare_time
+
+	
 
 func hit_player():
+	# Transition IN
+	if state_transition:
+		state_transition = false
+		target_time = 0.0
+		current_time =0.0
+
+	# Transition OUT
 	if target_time < current_time:
-		target_time = current_time + idle_time
+		state_transition = true
 		state = State.IDLE
 		
 
 func prepare_to_attack(): 
+	# Transition IN
+	if state_transition:
+		state_transition = false
+		target_time = prepare_time
+		current_time =0.0
+
 	# Prepare to attack behavior here
 	# Get player position, calculate direction to them
 	# Rotate towards the player
@@ -95,10 +121,15 @@ func prepare_to_attack():
 	# If time is up, switch to follow
 	# If unset, set target time
 	if target_time < current_time:
+		state_transition = true
 		state = State.FOLLOW
-		target_time = current_time + follow_time
 
 func follow(delta):
+	# Transition IN
+	if state_transition:
+		state_transition = false
+		target_time = follow_time
+		current_time =0.0
 
 	# Move along previous fixed direction
 	#direction = direction.normalized()
@@ -111,32 +142,37 @@ func follow(delta):
 
 
 	# If unset, set target time
+
+	# Transition OUT
 	if target_time < current_time:
-		target_time = current_time + idle_time
 		state = State.IDLE
-
-
+		state_transition = true
 	
-func die():
-	hit.emit()
-	queue_free()
+
 
 func slip(delta):
-
+	# Transition IN
+	if state_transition:
+		state_transition = false
+		target_time = slip_time
+		current_time =0.0
 
 	# Play slip animation
 	velocity = direction * slip_speed
 	global_position += velocity * delta
 
-	# If unset, set target time
+	# Transition OUT
 	if target_time < current_time:
-		target_time = current_time + idle_time
+		state_transition = true
 		state = State.IDLE
 
 
+func die():
+	hit.emit()
+	queue_free()
+		
 
-	pass # Replace with function body.
-	
+### Collision detection ###
 	
 func _on_banana_sensor_area_2d_area_entered(area):
 	print("Area name: " + area.get_parent().name)

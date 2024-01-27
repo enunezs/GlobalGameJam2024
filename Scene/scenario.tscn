@@ -9,12 +9,14 @@
 [node name="Node2D" type="Node2D" groups=["Scenario"]]
 
 [node name="DeathZone" type="Area2D" parent="." groups=["Scenario"]]
+scale = Vector2(1.67, 1.67)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DeathZone" groups=["Scenario"]]
+visible = false
 polygon = PackedVector2Array(584, 574, 769, 550, 896, 456, 976, 376, 951, 244, 850, 128, 662, 75, 411, 83, 241, 182, 174, 325, 214, 424, 310, 522, 458, 572, 564, 572, 566, 626, 70, 628, 55, 14, 1092, 17, 1089, 599, 574, 633)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(575.5, 324.5)
+[node name="BackgroundSprite2D" type="Sprite2D" parent="DeathZone"]
+position = Vector2(575.5, 325.099)
 scale = Vector2(0.261748, 0.260081)
 texture = ExtResource("1_8oqwo")
 
@@ -23,10 +25,11 @@ texture = ExtResource("1_8oqwo")
 [node name="CollisionPolygon2D" type="Area2D" parent="StaticBody2D" groups=["Scenario"]]
 
 [node name="Banana" parent="." instance=ExtResource("4_n4q1k")]
-position = Vector2(335, 207)
+position = Vector2(1075, 327)
 
 [node name="Player" parent="." instance=ExtResource("1_gvg3c")]
-position = Vector2(519, 330)
+position = Vector2(595, 333)
+FRICTION = 700
 
 [node name="Enemy" parent="." instance=ExtResource("4_lm6e7")]
 position = Vector2(1080, 593)

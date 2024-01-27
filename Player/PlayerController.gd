@@ -264,9 +264,9 @@ func update_animation():
 func _on_area_2d_area_entered(area):
 	#print("Area name: " + area.get_parent().name)
 	# if area is an item
-	if area.get_parent().is_in_group("Item") and state == State.MOVE and not area.get_parent().thrown:
+	if area.get_parent().is_in_group("Item") and state == State.MOVE and not area.get_parent().thrown and not item_holding:
 		# set state to carrying
-
+		
 		state = State.CARRYING
 		item = area.get_parent()
 	

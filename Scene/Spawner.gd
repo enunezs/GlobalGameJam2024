@@ -2,8 +2,8 @@ extends Node2D
 
 @export var spawner_enabled: bool = true;
 @export var spawn_target: PackedScene # Target for spawner
-@export var spawn_interval: float = 3.0 # Seconds between spawns
-@export var spawn_limit: int = 3 # Maximum number of mobs onscreen
+@export var spawn_interval: float = 1.0 # Seconds between spawns
+@export var spawn_limit: int = 300 # Maximum number of mobs onscreen
 
 var _spawn_speed: float = 1.0 / spawn_interval
 var _spawn_quantity: float 
@@ -17,9 +17,12 @@ func _ready():
 func spawn():
 	var mob = spawn_target.instantiate()
 	var screenSize = get_viewport().get_visible_rect().size
-	var rndX = rng.randi_range(0, screenSize.x)
-	var rndY = rng.randi_range(0, screenSize.y)
+	
+	# Repeat until valid (check if in elliptical stage)
+	var rndX = rng.randi_range(screenSize.x*0.3, screenSize.x*0.7)
+	var rndY = rng.randi_range(screenSize.y*0.3, screenSize.y*0.7)
 	mob.position = Vector2(rndX, rndY)
+	
 	add_child(mob)
 	active_mob_count += 1
 

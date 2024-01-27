@@ -39,3 +39,5 @@ func throw(dir):
 	#print("Direction is: " + str(direction))
 	thrown = true
 	
+func destroy():
+	queue_free()

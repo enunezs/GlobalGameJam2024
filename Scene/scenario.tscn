@@ -14,9 +14,6 @@ texture = ExtResource("1_8oqwo")
 
 [node name="Player" parent="." instance=ExtResource("1_gvg3c")]
 position = Vector2(209, 130)
-FRICTION = 500
-MAX_SPEED = 300
-ACCELERATION = 1500
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 

@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bx7uhay617455"]
+[gd_scene load_steps=5 format=3 uid="uid://bx7uhay617455"]
 
 [ext_resource type="Texture2D" uid="uid://dvtwe57fos71f" path="res://Enemies/Temp/STROOP-_Bully.png" id="1_acixa"]
 [ext_resource type="Script" path="res://Enemies/Enemy.gd" id="2_vrnss"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ogd4"]
 radius = 94.0479
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_03tmy"]
+radius = 77.0584
 
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("2_vrnss")
@@ -15,3 +18,11 @@ texture = ExtResource("1_acixa")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 17)
 shape = SubResource("CircleShape2D_7ogd4")
+
+[node name="BananaSensorArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BananaSensorArea2D"]
+position = Vector2(1, 18)
+shape = SubResource("CircleShape2D_03tmy")
+
+[connection signal="area_entered" from="BananaSensorArea2D" to="." method="_on_banana_sensor_area_2d_area_entered"]

@@ -67,7 +67,7 @@ func _physics_process(delta):
 			pick_up()
 
 		State.THROWING:
-			throw()
+			throwing()
 		State.STUNNED:
 			stunned(delta)
 	

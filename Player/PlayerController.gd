@@ -101,9 +101,9 @@ func apply_movement(accel):
 
 # Check for items
 func _on_area_2d_area_entered(area):
-	print("Area name: " + area.get_parent().name)
+	#print("Area name: " + area.get_parent().name)
 	# if area is an item
-	if area.get_parent().name == "Banana" and state == State.MOVE and not area.get_parent().thrown:
+	if area.get_parent().is_in_group("Item") and state == State.MOVE and not area.get_parent().thrown:
 		# set state to carrying
 
 		state = State.CARRYING
@@ -112,8 +112,8 @@ func _on_area_2d_area_entered(area):
 # Check for enemies
 func _on_area_2d_body_entered(body):
 	# if body is an enemy
-	print("Body name: " + body.name)
-	if body.name == "Enemy":
+	#print("Body name: " + str(body.is_in_group("Enemy")))
+	if body.is_in_group("Enemy"):
 		state = State.STUNNED
 		hit_direction = (get_global_position()- body.get_global_position()).normalized()
 		target_time = current_time + stunned_time
@@ -124,9 +124,9 @@ func _input(event):
 	# Mouse in viewport coordinates.
 	if event is InputEventMouseButton:
 		last_mouse_pos = event.position
-		print("Mouse Click/Unclick at: ", event.position)
+		#print("Mouse Click/Unclick at: ", event.position)
 		if event.is_pressed():
-			print("Mouse Clicked")
+			#print("Mouse Clicked")
 			# if player is carrying an item
 			if item_holding:
 				state = State.THROWING
@@ -146,7 +146,7 @@ func pick_up():
 	state = State.MOVE
 	
 func throwing():
-	print("Throwing") 
+	#print("Throwing") 
 	item_holding = false
 	# Disown the child
 	# Unparent item, preserve position 
@@ -176,15 +176,12 @@ func throwing():
 
 func stunned(delta):
 
-
-
 	velocity = hit_direction * 100
 	global_position += velocity * delta
 
 	# If unset, set target time
 	if target_time < current_time:
 		state = State.MOVE
-
 
 
 	pass # Replace with function body.

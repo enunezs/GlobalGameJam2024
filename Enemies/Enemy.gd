@@ -66,12 +66,16 @@ func idle():
 	# Play idle animation
 	pass
 	
-	
 	# If time is up, switch to prepare
 	if current_time > target_time:
 		state = State.PREPARE_TO_ATTACK	
 		target_time = current_time + prepare_time
-			
+
+func hit_player():
+		if target_time < current_time:
+	target_time = current_time + idle_time
+	state = State.IDLE
+	
 
 func prepare_to_attack(): 
 	# Prepare to attack behavior here
@@ -94,7 +98,12 @@ func follow(delta):
 	# Move along previous fixed direction
 	#direction = direction.normalized()
 	direction = direction.normalized()
-	global_position += direction * speed * delta
+
+	var cur_speed = speed * direction
+	set_velocity(cur_speed)	
+	move_and_slide()	
+
+
 
 	# If unset, set target time
 	if target_time < current_time:
@@ -118,14 +127,13 @@ func slip(delta):
 	pass # Replace with function body.
 	
 	
-
-
 func _on_banana_sensor_area_2d_area_entered(area):
 	print("Area name: " + area.get_parent().name)
+	
 	# if area is an item
-	if area.get_parent().name == "Banana" and area.get_parent().thrown:
+	if area.get_parent().is_in_group("Item") and area.get_parent().thrown:
 		# set state to carrying
-
+		print("Slip!")
 		state = State.SLIP
 		target_time = current_time + slip_time
 		# TODO 

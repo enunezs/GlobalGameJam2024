@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cwqkxnj1ajr43"]
+[gd_scene load_steps=13 format=3 uid="uid://cwqkxnj1ajr43"]
 
 [ext_resource type="Script" path="res://Player/PlayerController.gd" id="1_1t2qx"]
 [ext_resource type="Texture2D" uid="uid://b2dsd8r3x0qh2" path="res://Player/Assets/Clown-run.png" id="2_e3yr3"]
@@ -63,6 +63,44 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_tr5mu"]
+resource_name = "Run"
+length = 1.50001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.344617, 0.700598, 1.07321, 1.43852),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, -0.240489, 0.0, 0.171617, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ujqom"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0leyj"]
+_data = {
+"RESET": SubResource("Animation_ujqom"),
+"Run": SubResource("Animation_tr5mu")
+}
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_1t2qx")
@@ -93,6 +131,11 @@ position = Vector2(-10, -30)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_iqtpr")
 animation = &"Idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_0leyj")
+}
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

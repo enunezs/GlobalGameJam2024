@@ -9,10 +9,15 @@ var direction = Vector2(1, 0)
 var thrown= false
 var pickable = true
 
+@onready var animated_sprite = $AnimatedSprite2D
+@onready var animation_player = $AnimatedSprite2D/AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready(): 
 	thrown = false
+	animated_sprite.play("Whole") 
+	animation_player.play("Hover")
+
 
 func _physics_process(delta):
 	if thrown:
@@ -36,6 +41,22 @@ func throw(dir):
 	direction = dir
 	cur_speed = dir*start_speed
 	thrown = true
+
+	# Set animation
+	animated_sprite.play("Peeled") 
+	animation_player.stop()
+
+	#print("Direction is: " + str(direction))
+
+func drop(dir):
+	direction = dir
+	cur_speed = dir*start_speed/2
+	thrown = true
+
+	# Set animation
+	animated_sprite.play("Peeled") 
+	animation_player.stop()
+
 	#print("Direction is: " + str(direction))
 	
 

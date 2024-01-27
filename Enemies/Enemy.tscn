@@ -4,17 +4,9 @@
 [ext_resource type="Script" path="res://Enemies/Enemy.gd" id="2_vrnss"]
 [ext_resource type="Texture2D" uid="uid://c5svkujfs4rsw" path="res://Enemies/Bull/Bull-run.png" id="3_tcc0s"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1vhei"]
-shader = ExtResource("2_fkwq3")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 8.282
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2t0cb"]
-radius = 46.0
-height = 240.653
+radius = 34.0
+height = 182.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_03tmy"]
 radius = 96.5817
@@ -34,16 +26,19 @@ _data = {
 "Run": SubResource("Animation_bntuj")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1vhei"]
+shader = ExtResource("2_fkwq3")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 8.282
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("2_vrnss")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_1vhei")
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("3_tcc0s")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 6)
+position = Vector2(0, 7)
 rotation = 1.57079
 shape = SubResource("CapsuleShape2D_2t0cb")
 
@@ -60,5 +55,10 @@ libraries = {
 "": SubResource("AnimationLibrary_qrgug")
 }
 autoplay = "Run"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_1vhei")
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_tcc0s")
 
 [connection signal="area_entered" from="BananaSensorArea2D" to="." method="_on_banana_sensor_area_2d_area_entered"]

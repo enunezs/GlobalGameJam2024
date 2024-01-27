@@ -44,7 +44,9 @@ var direction = Vector2() # direction to player
 var last_mouse_pos = Vector2.RIGHT # last mouse position
 var hit_direction
 
-@onready var animation_player = $AnimatedSprite2D
+@onready var animated_sprite = $AnimatedSprite2D
+@onready var animation_player = $AnimatedSprite2D/AnimationPlayer
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready(): 
@@ -53,7 +55,7 @@ func _ready():
 	if object_holder == null:
 		print("Player not found")
 		return
-	if animation_player == null:
+	if animated_sprite == null:
 		print("Animation player not found")
 		return
 
@@ -97,6 +99,7 @@ func move(delta):
 		velocity = Vector2.ZERO
 		_target_time = 0.0
 		_current_time = 0.0
+		#animation_player.
 	
 	axis = get_input_axis()
 	if axis == Vector2.ZERO:
@@ -169,12 +172,43 @@ func throwing():
 	state = State.MOVE
 	pass # Replace with function body.
 
+func drop_item():
+	state_transition = false
+
+	#print("Throwing") 
+	item_holding = false
+
+	
+	var old_transform = item.global_transform
+	remove_child(item)
+	get_parent().add_child(item)
+	item.global_transform = old_transform
+
+	# throw item
+	# set item as not kinematic
+	# set item velocity to direction
+	item.set_physics_process(true)
+
+	# add force
+	direction = (last_mouse_pos - get_global_position()).normalized()
+	item.drop(direction)
+
+	item = null
+
+
+	state = State.MOVE
+
+	pass # Replace with function body.
+
 func stunned(delta):
 	# transition IN
 	if state_transition:
 		state_transition = false
 		_target_time = stunned_time
 		_current_time = 0.0
+
+		if item_holding:
+			drop_item()
 
 	var percent = _current_time / _target_time
 
@@ -197,22 +231,26 @@ func die():
 func update_animation():
 	# flip sprite
 	if velocity.x != 0:
-		animation_player.flip_h = velocity.x < 0
+		animated_sprite.flip_h = velocity.x < 0
 
+	if state_transition:
+		return
 	if state == State.MOVE:
+		animated_sprite.play("Run")
 		animation_player.play("Run")
+
 	elif state == State.CARRYING:
-		animation_player.play("Hold")
+		animated_sprite.play("Hold")
 	elif state == State.THROWING:
 		pass
-		#animation_player.play("throw")
+		#animated_sprite.play("throw")
 	elif state == State.STUNNED:
-		animation_player.play("Slide")
+		animated_sprite.play("Slide")
 	elif state == State.DEAD:
 		pass
-		#animation_player.play("dead")
+		#animated_sprite.play("dead")
 	else:
-		animation_player.play("Idle")
+		animated_sprite.play("Idle")
 
 
 
@@ -237,10 +275,10 @@ func _on_area_2d_area_entered(area):
 func _on_area_2d_body_entered(body):
 	# if body is an enemy
 	#print("Body name: " + str(body.is_in_group("Enemy")))
-	if body.is_in_group("Enemy"):
+	if body.is_in_group("Enemy") and not state == State.STUNNED:
 		state = State.STUNNED
 		hit_direction = (get_global_position()- body.get_global_position()).normalized()
-		_target_time = _current_time + stunned_time
+		body.player_hit()		
 			
 
 # on click

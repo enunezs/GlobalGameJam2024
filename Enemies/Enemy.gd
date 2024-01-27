@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-enum State {IDLE, PREPARE_TO_ATTACK, FOLLOW, SLIP, DEAD}
+enum State {IDLE, PREPARE_TO_ATTACK, FOLLOW, SLIP, DEAD, STOP}
 
 # Declare member variables here. Break down per state
 # IDLE
@@ -89,7 +89,7 @@ func idle():
 
 	
 
-func hit_player():
+func player_hit():
 	# Transition IN
 	if state_transition:
 		state_transition = false
@@ -100,7 +100,7 @@ func hit_player():
 	if target_time < current_time:
 		state_transition = true
 		state = State.IDLE
-		
+
 
 func prepare_to_attack(): 
 	# Transition IN
@@ -110,6 +110,14 @@ func prepare_to_attack():
 		current_time =0.0
 
 	# Prepare to attack behavior here
+	
+	# Check if player exists
+	if player == null:
+		print("Player not found")
+		state_transition = true
+		state = State.STOP
+		return
+	
 	# Get player position, calculate direction to them
 	# Rotate towards the player
 	direction = player.global_position - global_position

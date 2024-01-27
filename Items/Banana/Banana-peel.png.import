@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://trdbc3wp3pok"
-path="res://.godot/imported/banana.png-0516ab64a278bfe4aede4dbdc7fcb5ee.ctex"
+uid="uid://upl8soyvdmsf"
+path="res://.godot/imported/Banana-peel.png-64c88a74f3fb96010d3415f00ccf9c0c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Items/Assets/banana.png"
-dest_files=["res://.godot/imported/banana.png-0516ab64a278bfe4aede4dbdc7fcb5ee.ctex"]
+source_file="res://Items/Banana/Banana-peel.png"
+dest_files=["res://.godot/imported/Banana-peel.png-64c88a74f3fb96010d3415f00ccf9c0c.ctex"]
 
 [params]
 

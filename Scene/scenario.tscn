@@ -30,9 +30,7 @@ position = Vector2(1075, 327)
 [node name="Player" parent="." instance=ExtResource("1_gvg3c")]
 position = Vector2(595, 333)
 FRICTION = 700
-
-[node name="Enemy" parent="." instance=ExtResource("4_lm6e7")]
-position = Vector2(1080, 593)
+stun_velocity = 150.0
 
 [node name="EnemySpawner" type="Node2D" parent="."]
 script = ExtResource("5_m86nx")

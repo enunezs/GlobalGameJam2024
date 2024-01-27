@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bv0okeb42r02w"
-path="res://.godot/imported/banana_peel.png-64b57391617e4a16d9f4971e4a37fd8a.ctex"
+path="res://.godot/imported/banana_peel.png-23aadff4fa6899e0425db9f044f0d54a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Items/Assets/banana_peel.png"
-dest_files=["res://.godot/imported/banana_peel.png-64b57391617e4a16d9f4971e4a37fd8a.ctex"]
+source_file="res://Items/Banana/banana_peel.png"
+dest_files=["res://.godot/imported/banana_peel.png-23aadff4fa6899e0425db9f044f0d54a.ctex"]
 
 [params]
 

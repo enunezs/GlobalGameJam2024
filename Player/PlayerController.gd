@@ -28,11 +28,16 @@ enum State {IDLE, MOVE, CARRYING, THROWING, STUNNED, DEAD}
 # Member variables
 var current_time: float = 0.0
 var target_time: float = 0.0
+
+var stunned_time: float = 1.0
+
 var state = State.MOVE # start state
 var item = null # item being carried
 var item_holding = false # is player item_holding an item
 var direction = Vector2() # direction to player
 var last_mouse_pos = Vector2.RIGHT # last mouse position
+var hit_direction
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready(): 
@@ -62,7 +67,9 @@ func _physics_process(delta):
 			pick_up()
 
 		State.THROWING:
-			throwing()
+			throw()
+		State.STUNNED:
+			stunned(delta)
 	
 func move(delta):
 	
@@ -92,7 +99,7 @@ func apply_movement(accel):
 	velocity += accel
 	velocity = velocity.limit_length(MAX_SPEED)
 
-
+# Check for items
 func _on_area_2d_area_entered(area):
 	print("Area name: " + area.get_parent().name)
 	# if area is an item
@@ -102,8 +109,15 @@ func _on_area_2d_area_entered(area):
 		state = State.CARRYING
 		item = area.get_parent()
 
-
-	pass # Replace with function body.
+# Check for enemies
+func _on_area_2d_body_entered(body):
+	# if body is an enemy
+	print("Body name: " + body.name)
+	if body.name == "Enemy":
+		state = State.STUNNED
+		hit_direction = (get_global_position()- body.get_global_position()).normalized()
+		target_time = current_time + stunned_time
+			
 
 # on click
 func _input(event):
@@ -159,3 +173,20 @@ func throwing():
 
 	state = State.MOVE
 	pass # Replace with function body.
+
+func stunned(delta):
+
+
+
+	velocity = hit_direction * 100
+	global_position += velocity * delta
+
+	# If unset, set target time
+	if target_time < current_time:
+		state = State.MOVE
+
+
+
+	pass # Replace with function body.
+	
+	

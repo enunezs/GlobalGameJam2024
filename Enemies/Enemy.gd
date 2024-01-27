@@ -1,4 +1,4 @@
-extends Sprite2D
+extends CharacterBody2D
 
 enum State {IDLE, PREPARE_TO_ATTACK, FOLLOW}
 
@@ -93,5 +93,3 @@ func follow(delta):
 	if target_time < current_time:
 		target_time = current_time + idle_time
 		state = State.IDLE
-
-

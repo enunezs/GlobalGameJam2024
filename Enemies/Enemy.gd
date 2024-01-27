@@ -77,9 +77,9 @@ func idle():
 		target_time = current_time + prepare_time
 
 func hit_player():
-		if target_time < current_time:
-	target_time = current_time + idle_time
-	state = State.IDLE
+	if target_time < current_time:
+		target_time = current_time + idle_time
+		state = State.IDLE
 	
 
 func prepare_to_attack(): 

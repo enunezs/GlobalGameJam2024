@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_ktb51"]
 radius = 182.011
 
-[node name="Banana" type="CharacterBody2D" groups=["Item"]]
+[node name="Banana" type="CharacterBody2D"]
 script = ExtResource("1_rqrue")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -19,5 +19,3 @@ texture = ExtResource("2_ggeik")
 position = Vector2(0, 1.90735e-06)
 scale = Vector2(0.1, 0.1)
 shape = SubResource("CircleShape2D_ktb51")
-
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

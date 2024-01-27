@@ -28,6 +28,9 @@ enum State {IDLE, MOVE, CARRYING, THROWING, STUNNED, DEAD}
 # Member variables
 var current_time: float = 0.0
 var target_time: float = 0.0
+
+var stunned_time: float = 3.0
+
 var state = State.MOVE # start state
 var item = null # item being carried
 var item_holding = false # is player item_holding an item
@@ -35,9 +38,6 @@ var direction = Vector2() # direction to player
 var last_mouse_pos = Vector2.RIGHT # last mouse position
 var hit_direction
 
-
-var current_time: float = 0.0
-var target_time: float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready(): 
@@ -116,7 +116,8 @@ func _on_area_2d_body_entered(body):
 	if body.name == "Enemy":
 		state = State.STUNNED
 		hit_direction = (body.get_parent().get_global_position() - get_global_position()).normalized()
-
+		target_time = current_time + stunned_time
+			
 
 # on click
 func _input(event):

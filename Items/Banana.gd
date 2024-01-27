@@ -24,8 +24,7 @@ func _physics_process(delta):
 	
 func calculate_speed(delta):
 	
-	print("Velocity is: " + str(cur_speed) )
-	
+	#print("Velocity is: " + str(cur_speed) )
 	if cur_speed.length() >5:
 		cur_speed -= BANANA_FRICTION * cur_speed.normalized() * delta
 	else:
@@ -36,11 +35,14 @@ func calculate_speed(delta):
 func throw(dir):
 	direction = dir
 	cur_speed = dir*start_speed
-	#print("Direction is: " + str(direction))
 	thrown = true
+	#print("Direction is: " + str(direction))
 	
 
 
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("Scenario"):
-		queue_free()
+		destroy()
+		
+func destroy():
+	queue_free()

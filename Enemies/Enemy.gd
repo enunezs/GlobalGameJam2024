@@ -77,9 +77,9 @@ func idle():
 		target_time = current_time + prepare_time
 
 func hit_player():
-		if target_time < current_time:
-	target_time = current_time + idle_time
-	state = State.IDLE
+	if target_time < current_time:
+		target_time = current_time + idle_time
+		state = State.IDLE
 	
 
 func prepare_to_attack(): 
@@ -121,11 +121,6 @@ func die():
 	hit.emit()
 	queue_free()
 
-
-func _on_area_2d_area_entered(area):
-	if area.is_in_group("Scenario"):
-		state = State.DEAD
-
 func slip(delta):
 
 
@@ -154,3 +149,5 @@ func _on_banana_sensor_area_2d_area_entered(area):
 		target_time = current_time + slip_time
 		# TODO 
 		area.get_parent().destroy()
+	if area.is_in_group("Scenario"):
+		state = State.DEAD

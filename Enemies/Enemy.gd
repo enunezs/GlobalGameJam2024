@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-enum State {IDLE, PREPARE_TO_ATTACK, FOLLOW}
+enum State {IDLE, PREPARE_TO_ATTACK, FOLLOW, DEAD}
 
 # Declare member variables here. Break down per state
 # IDLE
@@ -12,6 +12,9 @@ var prepare_time = 1.5
 # FOLLOW
 var speed = 500
 var follow_time = 1.0
+
+# DEAD
+signal hit
 
 # Member variables
 var current_time: float = 0.0
@@ -54,6 +57,8 @@ func _process(delta):
 			prepare_to_attack()
 		State.FOLLOW:
 			follow(delta)
+		State.DEAD:
+			die()
 
 func idle():
 	# Play idle animation
@@ -93,3 +98,14 @@ func follow(delta):
 	if target_time < current_time:
 		target_time = current_time + idle_time
 		state = State.IDLE
+
+
+	
+func die():
+	hit.emit()
+	queue_free()
+
+
+func _on_area_2d_area_entered(area):
+	if area.is_in_group("Scenario"):
+		state = State.DEAD

@@ -24,6 +24,8 @@ enum State {IDLE, MOVE, CARRYING, THROWING, STUNNED, DEAD}
 # THROWING
 @onready var axis = Vector2.ZERO
 
+# DEAD
+signal hit
 
 # Member variables
 var current_time: float = 0.0
@@ -67,9 +69,11 @@ func _physics_process(delta):
 			pick_up()
 
 		State.THROWING:
-			throw()
+			throwing()
 		State.STUNNED:
 			stunned(delta)
+		State.DEAD:
+			die()
 	
 func move(delta):
 	
@@ -108,6 +112,10 @@ func _on_area_2d_area_entered(area):
 
 		state = State.CARRYING
 		item = area.get_parent()
+	
+	if area.is_in_group("Scenario"):
+		state = State.DEAD
+
 
 # Check for enemies
 func _on_area_2d_body_entered(body):
@@ -164,10 +172,7 @@ func throwing():
 	# add force
 	direction = (last_mouse_pos - get_global_position()).normalized()
 	item.throw(direction)
-	#item.apply_impulse(direction * 100)
-	#item.apply_friction(item.FRICTION * delta)
-	
-	#item.velocity = direction * 100
+
 	item = null
 
 
@@ -190,3 +195,6 @@ func stunned(delta):
 	pass # Replace with function body.
 	
 	
+func die():
+	hit.emit()
+	queue_free()

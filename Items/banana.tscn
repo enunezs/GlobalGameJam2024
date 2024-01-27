@@ -19,3 +19,5 @@ texture = ExtResource("2_ggeik")
 position = Vector2(0, 1.90735e-06)
 scale = Vector2(0.1, 0.1)
 shape = SubResource("CircleShape2D_ktb51")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -210,6 +210,7 @@ func stunned(delta):
 		if item_holding:
 			drop_item()
 
+
 	var percent = _current_time / _target_time
 
 	# Apply stun velocity, slow down with time
@@ -224,8 +225,10 @@ func stunned(delta):
 	
 	
 func die():
+	print("Player died")
+
 	hit.emit()
-	queue_free()
+	#queue_free()
 
 
 func update_animation():
@@ -278,6 +281,7 @@ func _on_area_2d_body_entered(body):
 	if body.is_in_group("Enemy") and not state == State.STUNNED:
 		state = State.STUNNED
 		hit_direction = (get_global_position()- body.get_global_position()).normalized()
+		state_transition = true
 		body.player_hit()		
 			
 

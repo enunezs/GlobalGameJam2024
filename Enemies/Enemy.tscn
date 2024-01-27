@@ -1,15 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://bx7uhay617455"]
+[gd_scene load_steps=10 format=3 uid="uid://eabsopjdxkdo"]
 
-[ext_resource type="Shader" path="res://Outline.gdshader" id="2_fkwq3"]
+[ext_resource type="Shader" path="res://Outline.gdshader" id="2_opp5o"]
 [ext_resource type="Script" path="res://Enemies/Enemy.gd" id="2_vrnss"]
 [ext_resource type="Texture2D" uid="uid://c5svkujfs4rsw" path="res://Enemies/Bull/Bull-run.png" id="3_tcc0s"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2t0cb"]
-radius = 34.0
-height = 182.0
+radius = 11.1718
+height = 110.743
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_03tmy"]
-radius = 96.5817
+radius = 77.0584
 
 [sub_resource type="Animation" id="Animation_ctdeh"]
 length = 0.001
@@ -27,9 +27,9 @@ _data = {
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1vhei"]
-shader = ExtResource("2_fkwq3")
+shader = ExtResource("2_opp5o")
 shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 8.282
+shader_parameter/width = 5.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true

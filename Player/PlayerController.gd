@@ -62,7 +62,7 @@ func _physics_process(delta):
 			pick_up()
 
 		State.THROWING:
-			throw()
+			throwing()
 	
 func move(delta):
 	
@@ -96,7 +96,7 @@ func apply_movement(accel):
 func _on_area_2d_area_entered(area):
 	print("Area name: " + area.get_parent().name)
 	# if area is an item
-	if area.get_parent().name == "Banana" and state == State.MOVE:
+	if area.get_parent().name == "Banana" and state == State.MOVE and not area.get_parent().thrown:
 		# set state to carrying
 
 		state = State.CARRYING
@@ -131,7 +131,7 @@ func pick_up():
 	#item.set_physics_process(false)
 	state = State.MOVE
 	
-func throw():
+func throwing():
 	print("Throwing") 
 	item_holding = false
 	# Disown the child
@@ -149,7 +149,10 @@ func throw():
 
 	# add force
 	direction = (last_mouse_pos - get_global_position()).normalized()
-	item.apply_impulse(direction * 100)
+	item.throw(direction)
+	#item.apply_impulse(direction * 100)
+	#item.apply_friction(item.FRICTION * delta)
+	
 	#item.velocity = direction * 100
 	item = null
 

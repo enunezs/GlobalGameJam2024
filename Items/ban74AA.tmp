@@ -7,6 +7,7 @@
 radius = 182.011
 
 [node name="Banana" type="CharacterBody2D"]
+scale = Vector2(0.1, 0.1)
 script = ExtResource("1_rqrue")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

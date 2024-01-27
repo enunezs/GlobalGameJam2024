@@ -1,28 +1,41 @@
-extends RigidBody2D
+extends CharacterBody2D
 
-var picked = false
+# have an unused, thrown, and sused state
+
+var start_speed = 500
+var cur_speed = Vector2(100, 100)
+var BANANA_FRICTION = 600
+var direction = Vector2(1, 0)
+var thrown= false
+var pickable = true
+
+
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
+func _ready(): 
+	thrown = false
 
 func _physics_process(delta):
-	if picked:
-		self.position = get_node("/Marker2D").global_position
+	if thrown:
+		calculate_speed(delta)
+		move_and_slide()			
+	else:
+		# Not thrown
+		pass		
+	
+func calculate_speed(delta):
+	
+	print("Velocity is: " + str(cur_speed) )
+	
+	if cur_speed.length() >5:
+		cur_speed -= BANANA_FRICTION * cur_speed.normalized() * delta
+	else:
+		cur_speed = Vector2.ZERO
 
-func _input(event):
-	if Input.is_action_just_pressed("pick_object"):
-		if not picked:
-			var bodies = $Area2D.get_overlapping_bodies()
-			for body in bodies:
-				if body.name == "CharacterBody2D" and get_node("../CharacterBody2D").can_pick:
-					picked = true
-					get_node("../CharacterBody2D").can_pick = false
-		else:
-			picked = false
-			get_node("../CharacterBody2D").can_pick = true
-			if get_node("../CharacterBody2D").sprite.flip_h == false:
-				apply_impulse(Vector2(), Vector2(90, 0))
-			else:
-				apply_impulse(Vector2(), Vector2(-90, 0))
-		
+	set_velocity(cur_speed)
+	
+func throw(dir):
+	direction = dir
+	cur_speed = dir*start_speed
+	#print("Direction is: " + str(direction))
+	thrown = true
+	

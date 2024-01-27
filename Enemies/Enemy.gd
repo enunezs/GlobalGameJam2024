@@ -1,4 +1,4 @@
-extends Sprite2D
+extends CharacterBody2D
 
 enum State {IDLE, PREPARE_TO_ATTACK, FOLLOW}
 

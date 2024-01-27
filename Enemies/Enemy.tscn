@@ -7,10 +7,10 @@
 radius = 94.0479
 
 [node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("2_vrnss")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_acixa")
-script = ExtResource("2_vrnss")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 17)

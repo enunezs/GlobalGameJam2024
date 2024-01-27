@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dccmqlsjva73h"]
+
+[ext_resource type="Script" path="res://Node2D.gd" id="1_rqrue"]
+[ext_resource type="Texture2D" uid="uid://bv0okeb42r02w" path="res://Items/Assets/banana_peel.png" id="2_ggeik"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ktb51"]
+radius = 182.011
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_byl1j"]
+radius = 150.0
+
+[node name="Node2D" type="RigidBody2D"]
+scale = Vector2(0.1, 0.1)
+gravity_scale = 0.0
+script = ExtResource("1_rqrue")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_ggeik")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1.90735e-06)
+scale = Vector2(0.1, 0.1)
+shape = SubResource("CircleShape2D_ktb51")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.90735e-06)
+scale = Vector2(0.1, 0.1)
+shape = SubResource("CircleShape2D_byl1j")

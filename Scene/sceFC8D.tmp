@@ -1,9 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdruj37nppf2s"]
+[gd_scene load_steps=5 format=3 uid="uid://bdruj37nppf2s"]
 
-[ext_resource type="Texture2D" uid="uid://d3fiaiehupgu4" path="res://Character/Assets/temporary_background.png" id="1_cy0nb"]
-[ext_resource type="PackedScene" uid="uid://736jrfei3td6" path="res://Character/character_body_2d.tscn" id="1_gvg3c"]
+[ext_resource type="PackedScene" uid="uid://cwqkxnj1ajr43" path="res://Player/Player.tscn" id="1_gvg3c"]
 [ext_resource type="Texture2D" uid="uid://dvtwe57fos71f" path="res://Enemies/Temp/STROOP-_Bully.png" id="2_cat5q"]
 [ext_resource type="Script" path="res://Enemies/Enemy.gd" id="3_vyiyh"]
+[ext_resource type="PackedScene" uid="uid://dccmqlsjva73h" path="res://Items/banana.tscn" id="4_n4q1k"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -19,3 +19,6 @@ position = Vector2(209, 130)
 [node name="Sprite2D" type="Sprite2D" parent="Enemy"]
 texture = ExtResource("2_cat5q")
 script = ExtResource("3_vyiyh")
+
+[node name="Banana" parent="." instance=ExtResource("4_n4q1k")]
+position = Vector2(525, 242)

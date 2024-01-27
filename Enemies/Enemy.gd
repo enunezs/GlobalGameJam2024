@@ -23,8 +23,6 @@ var direction = Vector2() # direction to player
 
 # Called when the node enters the scene tree for the first time.
 func _ready(): 
-	#player = get_node("Player") # Replace with your player node's path
-
 
 	# log error if not found
 	if player == null:
@@ -40,13 +38,13 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# print enemy state in text
-	print("State: " + str(state))
+	#print("State: " + str(state))
 	
 	current_time += delta
 
 	#print current and target time
-	print("Current time: " + str(current_time))
-	print("Target time: " + str(target_time))
+	#print("Current time: " + str(current_time))
+	#print("Target time: " + str(target_time))
 
 	
 	match state:

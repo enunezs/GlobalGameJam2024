@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdruj37nppf2s"]
+
+[ext_resource type="PackedScene" uid="uid://cwqkxnj1ajr43" path="res://Player/Player.tscn" id="1_gvg3c"]
+[ext_resource type="Texture2D" uid="uid://dvtwe57fos71f" path="res://Enemies/Temp/STROOP-_Bully.png" id="2_cat5q"]
+[ext_resource type="Script" path="res://Enemies/Enemy.gd" id="3_vyiyh"]
+[ext_resource type="PackedScene" uid="uid://dccmqlsjva73h" path="res://Items/banana.tscn" id="4_n4q1k"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_gvg3c")]
+position = Vector2(209, 130)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="Area2D" parent="StaticBody2D"]
+
+[node name="Enemy" type="CharacterBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
+texture = ExtResource("2_cat5q")
+script = ExtResource("3_vyiyh")
+
+[node name="Banana" parent="." instance=ExtResource("4_n4q1k")]
+position = Vector2(525, 242)

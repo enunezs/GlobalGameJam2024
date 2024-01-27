@@ -11,9 +11,9 @@ config_version=5
 [application]
 
 config/name="PayasoDeRodeo"
-run/main_scene="res://scenario.tscn"
+run/main_scene="res://Scene/scenario.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Player/icon.svg"
 
 [input]
 

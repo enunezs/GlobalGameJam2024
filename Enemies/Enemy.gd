@@ -236,11 +236,12 @@ func _on_banana_sensor_area_2d_area_entered(area):
 
 		area.get_parent().destroy()
 
-	if area.is_in_group("Scenario"):
-		state = State.DEAD
-
+	
  
-
+func _on_banana_sensor_area_2d_area_exited(area):
+		
+	if area.is_in_group("Scenario") and not state == State.SPAWN:
+		state = State.DEAD
 
 func update_animation():
 	# flip sprite
@@ -279,3 +280,5 @@ func update_animation():
 		animated_sprite.play("Sit")
 		
 	
+
+

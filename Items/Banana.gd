@@ -62,8 +62,11 @@ func drop(dir):
 
 
 func _on_area_2d_area_entered(area):
-	if area.is_in_group("Scenario"):
-		destroy()
-		
+	pass
 func destroy():
 	queue_free()
+
+
+func _on_area_2d_area_exited(area):
+	if area.is_in_group("Scenario"):
+		destroy()

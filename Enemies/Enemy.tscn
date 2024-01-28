@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bx7uhay617455"]
+[gd_scene load_steps=17 format=3 uid="uid://bx7uhay617455"]
 
 [ext_resource type="Shader" path="res://Outline.gdshader" id="2_opp5o"]
 [ext_resource type="Texture2D" uid="uid://ct72stj7nl8gt" path="res://Player/icon.svg" id="2_optjj"]
@@ -12,11 +12,19 @@
 blend_mode = 3
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2t0cb"]
-radius = 11.1718
-height = 110.743
+radius = 34.0
+height = 182.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_03tmy"]
-radius = 77.0584
+radius = 96.5817
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1vhei"]
+shader = ExtResource("2_opp5o")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 8.282
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1vhei"]
 shader = ExtResource("2_opp5o")
@@ -80,7 +88,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_bntuj"]
 resource_name = "Run"
-length = 1.44445
+length = 0.333334
 loop_mode = 1
 step = 0.0111111
 tracks/0/type = "bezier"
@@ -109,7 +117,8 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qrgug"]
 _data = {
 "RESET": SubResource("Animation_ctdeh"),
-"Run": SubResource("Animation_bntuj")
+"Run": SubResource("Animation_bntuj"),
+"Spawn": SubResource("Animation_n2vql")
 }
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
@@ -157,3 +166,4 @@ texture = ExtResource("3_tcc0s")
 stream = ExtResource("4_yd253")
 
 [connection signal="area_entered" from="BananaSensorArea2D" to="." method="_on_banana_sensor_area_2d_area_entered"]
+[connection signal="area_exited" from="BananaSensorArea2D" to="." method="_on_banana_sensor_area_2d_area_exited"]

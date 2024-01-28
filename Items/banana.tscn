@@ -1,12 +1,21 @@
-[gd_scene load_steps=10 format=3 uid="uid://dccmqlsjva73h"]
+[gd_scene load_steps=13 format=3 uid="uid://dccmqlsjva73h"]
 
 [ext_resource type="Script" path="res://Items/Banana.gd" id="1_rqrue"]
-[ext_resource type="Texture2D" uid="uid://bv0okeb42r02w" path="res://Items/Banana/banana_peel.png" id="2_wb7dw"]
+[ext_resource type="Texture2D" uid="uid://bbywgphxgea6u" path="res://Scene/Effects/Shadow-banana.png" id="2_2isq2"]
+[ext_resource type="Shader" path="res://Outline.gdshader" id="3_6dmfo"]
 [ext_resource type="Texture2D" uid="uid://upl8soyvdmsf" path="res://Items/Banana/Banana-peel.png" id="3_qvhwq"]
 [ext_resource type="Texture2D" uid="uid://trdbc3wp3pok" path="res://Items/Banana/Banana.png" id="4_yo6a7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ktb51"]
 radius = 182.011
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ro8tg"]
+shader = ExtResource("3_6dmfo")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 20.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_cy83o"]
 animations = [{
@@ -111,11 +120,11 @@ _data = {
 scale = Vector2(2, 2)
 script = ExtResource("1_rqrue")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-1.90735e-06, -5)
-scale = Vector2(0.057874, 0.057874)
-texture = ExtResource("2_wb7dw")
+[node name="ShadowSprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_5cctt")
+position = Vector2(-13.7675, -37.875)
+scale = Vector2(0.214946, 0.16602)
+texture = ExtResource("2_2isq2")
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -125,6 +134,7 @@ scale = Vector2(0.1, 0.1)
 shape = SubResource("CircleShape2D_ktb51")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_ro8tg")
 position = Vector2(-1.5, -3.5)
 scale = Vector2(0.08, 0.08)
 sprite_frames = SubResource("SpriteFrames_cy83o")

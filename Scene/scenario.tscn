@@ -203,6 +203,7 @@ shader_parameter/offset = Vector2(0, 0)
 scale = Vector2(1.67, 1.67)
 
 [node name="Water" type="Sprite2D" parent="DeathZone"]
+z_index = -2
 material = SubResource("ShaderMaterial_8bbgh")
 position = Vector2(575, 322)
 scale = Vector2(0.6, 0.6)
@@ -224,7 +225,7 @@ scale = Vector2(0.598802, 0.598802)
 texture = ExtResource("5_ni207")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DeathZone" groups=["Scenario"]]
-polygon = PackedVector2Array(364.072, 538.922, 999.401, 531.138, 1043.11, 468.263, 1017.37, 377.246, 1050.9, 267.066, 993.413, 216.168, 904.192, 207.186, 682.635, 210.18, 461.677, 196.407, 195.21, 214.371, 139.521, 232.335, 139.521, 279.641, 146.707, 326.347, 140.719, 480.24, 190.419, 523.952)
+polygon = PackedVector2Array(545.509, 517.365, 867.066, 525.748, 998.204, 522.754, 1031.14, 462.874, 1005.39, 371.856, 1038.32, 277.844, 986.826, 223.952, 904.192, 207.186, 686.228, 214.97, 461.078, 203.593, 229.341, 216.766, 174.85, 219.76, 146.108, 252.695, 158.084, 307.186, 155.689, 402.395, 149.701, 476.647, 171.257, 504.192, 211.976, 521.557, 350.299, 528.742)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="DeathZone"]
 libraries = {

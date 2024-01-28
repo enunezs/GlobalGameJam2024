@@ -248,10 +248,8 @@ func stunned(delta):
 		state_transition = true
 	
 func die():
-	print("Player died")
-
 	hit.emit()
-	#queue_free()
+	queue_free()
 
 func update_animation():
 	# flip sprite
@@ -292,7 +290,6 @@ func _on_area_2d_area_entered(area):
 func _on_area_2d_area_exited(area):
 	if area.is_in_group("Scenario") and not state == State.SPAWN:
 		state = State.DEAD
-
 		
 # Check for enemies
 func _on_area_2d_body_entered(body):

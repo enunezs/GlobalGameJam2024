@@ -58,15 +58,11 @@ func drop(dir):
 	animation_player.stop()
 
 	#print("Direction is: " + str(direction))
-	
 
-
-func _on_area_2d_area_entered(area):
-	pass
 func destroy():
 	queue_free()
 
 
 func _on_area_2d_area_exited(area):
-	if area.is_in_group("Scenario"):
+	if area.is_in_group("Scenario") and thrown:
 		destroy()

@@ -37,7 +37,7 @@ texture = ExtResource("2_lr6w1")
 position = Vector2(1075, 327)
 
 [node name="Player" parent="." instance=ExtResource("1_gvg3c")]
-position = Vector2(595, 333)
+position = Vector2(595, 424)
 FRICTION = 700
 stun_velocity = 150.0
 
@@ -54,5 +54,3 @@ spawn_interval = 0.1
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_6b0it")
 autoplay = true
-
-[connection signal="area_entered" from="DeathZone" to="Player" method="_on_area_2d_area_entered"]

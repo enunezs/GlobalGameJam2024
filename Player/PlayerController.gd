@@ -14,6 +14,7 @@ enum State {IDLE, MOVE, CARRYING, THROWING, STUNNED, DEAD, SPAWN}
 @export var MAX_SPEED = 300
 @export var ACCELERATION = 1500
 @onready var MOVE_SOUND = $steps
+@onready var GUNSHOT = $gunshot
 
 # PICKING_UP
 # Get position of 
@@ -87,8 +88,11 @@ func _physics_process(delta):
 
 		State.THROWING:
 			throwing()
+			GUNSHOT.play()
 		State.STUNNED:
 			stunned(delta)
+			GUNSHOT.play()
+			
 		State.DEAD:
 			die()
 
@@ -204,7 +208,7 @@ func throwing():
 	item.set_physics_process(true)
 
 	# add force
-	direction = (last_mouse_pos - get_global_position()).normalized()
+	direction = (last_mouse_pos - item.get_global_position()).normalized()
 	item.throw(direction)
 
 	item = null

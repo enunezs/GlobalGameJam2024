@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://upl8soyvdmsf" path="res://Items/Banana/Banana-peel.png" id="3_qvhwq"]
 [ext_resource type="Texture2D" uid="uid://trdbc3wp3pok" path="res://Items/Banana/Banana.png" id="4_yo6a7"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5cctt"]
+blend_mode = 2
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ktb51"]
 radius = 182.011
 

@@ -22,7 +22,11 @@ var slip_speed = 300
 
 # BOUNCE
 var bounce_time = 2.0
- 
+
+# HIT
+signal enemy_hit
+@onready var ENEMY_HIT = $enemy_hit_sound
+
 # Member variables
 var state_transition : bool = true
 var current_time: float = 0.0
@@ -76,10 +80,11 @@ func _process(delta):
 		State.DEAD:
 			die()
 		State.BOUNCE:
-			pass
+			ENEMY_HIT.play()
 			
 		State.SLIP:
 			slip(delta)
+			ENEMY_HIT.play()
 	
 	update_animation()
 
@@ -258,15 +263,15 @@ func update_animation():
 
 	elif state == State.SPAWN:
 		animation_player.play("Spawn")
-		animated_sprite.play("Sit")
+		# animated_sprite.play("Sit")
 
 	elif state == State.IDLE:
 		animated_sprite.play("Sit")
-		#animation_player.play("Run")
+		# animation_player.play("Run")
 
 	elif state == State.SLIP:
-		animated_sprite.play("Sit")
-		#animation_player.play("Run")
+		animated_sprite.play("Stun")
+		# animation_player.play("Run")
 
 	elif state == State.BOUNCE:
 		animated_sprite.play("Stun")

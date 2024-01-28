@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 enum State {IDLE, PREPARE_TO_ATTACK, FOLLOW, SLIP, DEAD, STOP, SPAWN, BOUNCE}
 
+var score = 0
 # Declare member variables here. Break down per state
 # IDLE
 var idle_time = .5
@@ -24,8 +25,8 @@ var slip_speed = 300
 var bounce_time = 2.0
 
 # HIT
-signal enemy_hit
 @onready var ENEMY_HIT = $enemy_hit_sound
+@onready var FALL = $fall
 
 # Member variables
 var state_transition : bool = true
@@ -80,11 +81,9 @@ func _process(delta):
 		State.DEAD:
 			die()
 		State.BOUNCE:
-			ENEMY_HIT.play()
-			
+			pass
 		State.SLIP:
 			slip(delta)
-			ENEMY_HIT.play()
 	
 	update_animation()
 
@@ -247,15 +246,19 @@ func _on_banana_sensor_area_2d_area_entered(area):
 func _on_banana_sensor_area_2d_area_exited(area):
 		
 	if area.is_in_group("Scenario") and not state == State.SPAWN:
+		hit.emit()
+		var node = get_node("/root/Node2D/UserInterface/ScoreLabel")
+		print(node)
+		hit.connect(node._on_enemy_squashed.bind())
 		state = State.DEAD
+		
+		
+	
 
 func update_animation():
 	# flip sprite
 	if velocity.x != 0:
 		animated_sprite.flip_h = velocity.x > 0
-
-
-	
 		
 	if state == State.FOLLOW:
 		animated_sprite.play("Run")

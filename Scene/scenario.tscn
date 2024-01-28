@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bdruj37nppf2s"]
+[gd_scene load_steps=15 format=3 uid="uid://bdruj37nppf2s"]
 
 [ext_resource type="PackedScene" uid="uid://cwqkxnj1ajr43" path="res://Player/Player.tscn" id="1_gvg3c"]
 [ext_resource type="Shader" path="res://Screentone.gdshader" id="1_yxtlx"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Spawner/Spawner.gd" id="5_m86nx"]
 [ext_resource type="Texture2D" uid="uid://b2orru0gvqnrb" path="res://Scene/floor.png" id="7_1la2c"]
 [ext_resource type="AudioStream" uid="uid://ber47nvnur5mw" path="res://Sound/PayasoDeRodeo.mp3" id="7_6b0it"]
+[ext_resource type="Script" path="res://Scene/Label.gd" id="8_kwhw1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8bbgh"]
 shader = ExtResource("1_yxtlx")
@@ -22,6 +23,14 @@ resource_name = "Background"
 _data = {
 "Background": SubResource("Animation_f82gp")
 }
+
+[sub_resource type="SystemFont" id="SystemFont_ucuut"]
+
+[sub_resource type="Theme" id="Theme_uwvrh"]
+default_font = SubResource("SystemFont_ucuut")
+default_font_size = 22
+
+[sub_resource type="Theme" id="Theme_7drr6"]
 
 [node name="Node2D" type="Node2D" groups=["Scenario"]]
 
@@ -80,3 +89,21 @@ spawn_limit = 10
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_6b0it")
 autoplay = true
+
+[node name="UserInterface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_uwvrh")
+
+[node name="ScoreLabel" type="Label" parent="UserInterface"]
+layout_mode = 0
+offset_left = 1117.0
+offset_top = 96.0
+offset_right = 1200.0
+offset_bottom = 127.0
+theme = SubResource("Theme_7drr6")
+theme_override_font_sizes/font_size = 76
+text = "Score: 0"
+script = ExtResource("8_kwhw1")

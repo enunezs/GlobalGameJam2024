@@ -294,6 +294,8 @@ func die():
 		hit.emit()
 		queue_free()
 
+		get_tree().change_scene_to_file("res://Start.tscn")
+
 		# game over
 
 func update_animation():

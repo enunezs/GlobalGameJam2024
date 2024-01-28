@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://b2dsd8r3x0qh2" path="res://Player/Assets/Clown-run.png" id="2_e3yr3"]
 [ext_resource type="Shader" path="res://Outline.gdshader" id="2_swwg2"]
 [ext_resource type="Texture2D" uid="uid://ciumek4o0qi8p" path="res://Player/Assets/Clown-hold.png" id="4_vyv80"]
-[ext_resource type="Animation" path="res://Spawn.res" id="5_ijd4e"]
-[ext_resource type="AudioStream" uid="uid://dga62gdwjnmid" path="res://Sound/steps.mp3" id="6_a2jql"]
+[ext_resource type="Animation" uid="uid://b5n45l2crj37d" path="res://Spawn.res" id="5_ijd4e"]
+[ext_resource type="AudioStream" uid="uid://cdjuy56roen5x" path="res://Sound/steps.mp3" id="6_a2jql"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_38xbu"]
 shader = ExtResource("2_swwg2")
@@ -237,4 +237,5 @@ libraries = {
 stream = ExtResource("6_a2jql")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

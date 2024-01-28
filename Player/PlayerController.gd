@@ -288,10 +288,12 @@ func _on_area_2d_area_entered(area):
 		state = State.CARRYING
 		item = area.get_parent()
 	
-	if area.is_in_group("Scenario"):
+
+func _on_area_2d_area_exited(area):
+	if area.is_in_group("Scenario") and not state == State.SPAWN:
 		state = State.DEAD
 
-
+		
 # Check for enemies
 func _on_area_2d_body_entered(body):
 	# if body is an enemy
@@ -314,4 +316,5 @@ func _input(event):
 			# if player is carrying an item
 			if item_holding:
 				state = State.THROWING
+
 

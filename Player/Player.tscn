@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cwqkxnj1ajr43"]
+[gd_scene load_steps=19 format=3 uid="uid://cwqkxnj1ajr43"]
 
 [ext_resource type="Script" path="res://Player/PlayerController.gd" id="1_1t2qx"]
 [ext_resource type="Texture2D" uid="uid://dom5s2v45jjfb" path="res://Scene/Effects/Shadow-clown.png" id="2_diqrt"]
@@ -7,7 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://ciumek4o0qi8p" path="res://Player/Assets/Clown-hold.png" id="4_vyv80"]
 [ext_resource type="Texture2D" uid="uid://cfd08xedv6tmu" path="res://Player/Assets/Clown-idle.png" id="5_c4ryl"]
 [ext_resource type="Animation" uid="uid://b5n45l2crj37d" path="res://Spawn.res" id="5_ijd4e"]
-[ext_resource type="AudioStream" uid="uid://cdjuy56roen5x" path="res://Sound/steps.mp3" id="6_a2jql"]
+[ext_resource type="AudioStream" uid="uid://dga62gdwjnmid" path="res://Sound/steps.mp3" id="6_a2jql"]
+[ext_resource type="AudioStream" uid="uid://cn8h1fyqei6sy" path="res://Sound/gunshot.mp3" id="9_2mo1s"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6i2g8"]
 blend_mode = 2
@@ -278,6 +279,10 @@ stream = ExtResource("6_a2jql")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3
+
+[node name="gunshot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_2mo1s")
+volume_db = 3.971
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

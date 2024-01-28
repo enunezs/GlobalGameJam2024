@@ -236,5 +236,8 @@ libraries = {
 [node name="steps" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_a2jql")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

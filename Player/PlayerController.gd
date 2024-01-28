@@ -50,7 +50,7 @@ var hit_direction
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready(): 
+func _ready(): 	
 
 	# log error if not found
 	if object_holder == null:
@@ -133,12 +133,17 @@ func move(delta):
 		apply_movement(axis * ACCELERATION * delta)
 		
 	move_and_slide()
-	MOVE_SOUND.play()
 
 func get_input_axis():
 
 	axis.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	axis.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
+	if axis.y or axis.x != 0:
+		$Timer.pitch_scale = randf_range(1.2, 1)
+		if !MOVE_SOUND.playing():
+			MOVE_SOUND.play()
+			
+		
 	return axis.normalized()
 
 func apply_friction(amount):

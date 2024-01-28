@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bdruj37nppf2s"]
+[gd_scene load_steps=17 format=3 uid="uid://bdruj37nppf2s"]
 
 [ext_resource type="PackedScene" uid="uid://cwqkxnj1ajr43" path="res://Player/Player.tscn" id="1_gvg3c"]
 [ext_resource type="Shader" path="res://Screentone.gdshader" id="1_yxtlx"]
@@ -6,8 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://bx7uhay617455" path="res://Enemies/Enemy.tscn" id="4_lm6e7"]
 [ext_resource type="PackedScene" uid="uid://dccmqlsjva73h" path="res://Items/banana.tscn" id="4_n4q1k"]
 [ext_resource type="Script" path="res://Spawner/Spawner.gd" id="5_m86nx"]
+[ext_resource type="Texture2D" uid="uid://bcj32n2pmcuhe" path="res://Scene/stairs-1.png" id="5_ni207"]
 [ext_resource type="Texture2D" uid="uid://b2orru0gvqnrb" path="res://Scene/floor.png" id="7_1la2c"]
 [ext_resource type="AudioStream" uid="uid://ber47nvnur5mw" path="res://Sound/PayasoDeRodeo.mp3" id="7_6b0it"]
+[ext_resource type="Texture2D" uid="uid://6eqsldla2yau" path="res://Scene/stairs-2.png" id="9_uu5ap"]
+[ext_resource type="Texture2D" uid="uid://c25d5ht3b5hug" path="res://Scene/stairs-3.png" id="10_j774m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8bbgh"]
 shader = ExtResource("1_yxtlx")
@@ -205,6 +208,21 @@ position = Vector2(575, 322)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("2_wmsvg")
 
+[node name="Stairs-3" type="Sprite2D" parent="DeathZone"]
+position = Vector2(573.054, 320.958)
+scale = Vector2(0.598802, 0.598802)
+texture = ExtResource("10_j774m")
+
+[node name="Stairs-2" type="Sprite2D" parent="DeathZone"]
+position = Vector2(573.054, 319.162)
+scale = Vector2(0.598802, 0.598802)
+texture = ExtResource("9_uu5ap")
+
+[node name="Stairs-1" type="Sprite2D" parent="DeathZone"]
+position = Vector2(574.85, 319.162)
+scale = Vector2(0.598802, 0.598802)
+texture = ExtResource("5_ni207")
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DeathZone" groups=["Scenario"]]
 polygon = PackedVector2Array(364.072, 538.922, 999.401, 531.138, 1043.11, 468.263, 1017.37, 377.246, 1050.9, 267.066, 993.413, 216.168, 904.192, 207.186, 682.635, 210.18, 461.677, 196.407, 195.21, 214.371, 139.521, 232.335, 139.521, 279.641, 146.707, 326.347, 140.719, 480.24, 190.419, 523.952)
 
@@ -227,7 +245,7 @@ visible = false
 visible = false
 
 [node name="Banana" parent="." instance=ExtResource("4_n4q1k")]
-position = Vector2(1075, 327)
+position = Vector2(952, 567)
 
 [node name="Player" parent="." instance=ExtResource("1_gvg3c")]
 position = Vector2(595, 424)

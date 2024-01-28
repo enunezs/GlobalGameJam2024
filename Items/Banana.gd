@@ -2,9 +2,9 @@ extends CharacterBody2D
 
 # have an unused, thrown, and sused state
 
-var start_speed = 500
+@export var start_speed = 500
+@export var BANANA_FRICTION = 600
 var cur_speed = Vector2(100, 100)
-var BANANA_FRICTION = 600
 var direction = Vector2(1, 0)
 var thrown= false
 var pickable = true

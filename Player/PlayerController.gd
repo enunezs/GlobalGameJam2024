@@ -141,7 +141,7 @@ func move(delta):
 
 
 	# Animations
-	if velocity.x != 0:
+	if axis.x != 0:
 		animated_sprite.flip_h = velocity.x < 0
 
 	if item_holding:

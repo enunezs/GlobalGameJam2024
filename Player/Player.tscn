@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://b2dsd8r3x0qh2" path="res://Player/Assets/Clown-run.png" id="2_e3yr3"]
 [ext_resource type="Shader" path="res://Outline.gdshader" id="2_swwg2"]
 [ext_resource type="Texture2D" uid="uid://ciumek4o0qi8p" path="res://Player/Assets/Clown-hold.png" id="4_vyv80"]
-[ext_resource type="Animation" uid="uid://b5n45l2crj37d" path="res://Spawn.res" id="5_ijd4e"]
-[ext_resource type="AudioStream" uid="uid://cdjuy56roen5x" path="res://Sound/steps.mp3" id="6_a2jql"]
+[ext_resource type="Animation" path="res://Spawn.res" id="5_ijd4e"]
+[ext_resource type="AudioStream" uid="uid://dga62gdwjnmid" path="res://Sound/steps.mp3" id="6_a2jql"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_38xbu"]
 shader = ExtResource("2_swwg2")
@@ -157,6 +157,18 @@ tracks/7/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_tr5mu"]
 resource_name = "Run"
@@ -185,6 +197,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.343526, 0.730468, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0leyj"]
@@ -233,6 +257,9 @@ libraries = {
 "": SubResource("AnimationLibrary_0leyj")
 }
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="AnimatedSprite2D"]
+stream = ExtResource("6_a2jql")
+
 [node name="steps" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_a2jql")
 
@@ -240,5 +267,4 @@ stream = ExtResource("6_a2jql")
 wait_time = 0.3
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

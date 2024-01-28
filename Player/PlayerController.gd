@@ -137,12 +137,7 @@ func move(delta):
 func get_input_axis():
 
 	axis.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
-	axis.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
-	if axis.y or axis.x != 0:
-		$Timer.pitch_scale = randf_range(1.2, 1)
-		if !MOVE_SOUND.playing():
-			MOVE_SOUND.play()
-			
+	axis.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))	
 		
 	return axis.normalized()
 

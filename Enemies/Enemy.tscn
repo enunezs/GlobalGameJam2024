@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bx7uhay617455"]
+[gd_scene load_steps=16 format=3 uid="uid://bx7uhay617455"]
 
 [ext_resource type="Shader" path="res://Outline.gdshader" id="2_opp5o"]
 [ext_resource type="Texture2D" uid="uid://ct72stj7nl8gt" path="res://Player/icon.svg" id="2_optjj"]
@@ -12,16 +12,16 @@
 blend_mode = 3
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2t0cb"]
-radius = 34.0
-height = 182.0
+radius = 11.1718
+height = 110.743
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_03tmy"]
-radius = 96.5817
+radius = 77.0584
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1vhei"]
 shader = ExtResource("2_opp5o")
 shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 8.282
+shader_parameter/width = 5.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
@@ -80,7 +80,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_bntuj"]
 resource_name = "Run"
-length = 0.333334
+length = 1.44445
 loop_mode = 1
 step = 0.0111111
 tracks/0/type = "bezier"
@@ -106,37 +106,10 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.0348448)
 }
 
-[sub_resource type="Animation" id="Animation_n2vql"]
-resource_name = "Spawn"
-length = 1.80001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = false
-tracks/0/path = NodePath("AnimatedSprite2D:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(-10, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0.930027)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(-535.082, -0.25, 0, 0.25, 0, 0, -0.0273538, -215.092, 0.104462, -110.473, 0, -0.0914043, -117.377, 0.0587598, -48.3318, 0, -0.0565835, -51.7645, 0.25, 0),
-"times": PackedFloat32Array(0.0273537, 0.826991, 1.18173, 1.44506)
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qrgug"]
 _data = {
 "RESET": SubResource("Animation_ctdeh"),
-"Run": SubResource("Animation_bntuj"),
-"Spawn": SubResource("Animation_n2vql")
+"Run": SubResource("Animation_bntuj")
 }
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
@@ -184,4 +157,3 @@ texture = ExtResource("3_tcc0s")
 stream = ExtResource("4_yd253")
 
 [connection signal="area_entered" from="BananaSensorArea2D" to="." method="_on_banana_sensor_area_2d_area_entered"]
-[connection signal="area_exited" from="BananaSensorArea2D" to="." method="_on_banana_sensor_area_2d_area_exited"]

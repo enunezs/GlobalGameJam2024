@@ -93,7 +93,6 @@ func _physics_process(delta):
 			die()
 
 	# update animation
-	update_animation() 
 
 	
 ### State: SPAWN
@@ -124,6 +123,8 @@ func move(delta):
 		_target_time = 0.0
 		_current_time = 0.0
 		#animation_player.
+		animation_player.play("Run")
+		
 	
 	axis = get_input_axis()
 	if axis == Vector2.ZERO:
@@ -133,6 +134,21 @@ func move(delta):
 		apply_movement(axis * ACCELERATION * delta)
 		
 	move_and_slide()
+
+
+	# Animations
+	if velocity.x != 0:
+		animated_sprite.flip_h = velocity.x < 0
+
+	if item_holding:
+		animated_sprite.play("Hold")
+	elif velocity.length() < 1.0 :
+		animated_sprite.play("Idle")
+		animation_player.play("Idle")
+
+	else:
+		animated_sprite.play("Run")
+
 
 func get_input_axis():
 
@@ -153,6 +169,7 @@ func apply_movement(accel):
 
 ### State: CARRYING
 func pick_up():
+
 	state_transition = false
 
 
@@ -231,6 +248,9 @@ func stunned(delta):
 		_target_time = stunned_time
 		_current_time = 0.0
 
+
+		animated_sprite.play("Slide")
+
 		if item_holding:
 			drop_item()
 
@@ -255,27 +275,7 @@ func die():
 
 func update_animation():
 	# flip sprite
-	if velocity.x != 0:
-		animated_sprite.flip_h = velocity.x < 0
-
-	if not state_transition:
-		return
-	if state == State.MOVE:
-		animated_sprite.play("Run")
-		animation_player.play("Run")
-
-	elif state == State.CARRYING:
-		animated_sprite.play("Hold")
-	elif state == State.THROWING:
-		pass
-		#animated_sprite.play("throw")
-	elif state == State.STUNNED:
-		animated_sprite.play("Slide")
-	elif state == State.DEAD:
-		pass
-		#animated_sprite.play("dead")
-	else:
-		animated_sprite.play("Idle")
+	pass
 
 ### External signals
 # Check for items

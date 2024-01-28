@@ -13,6 +13,7 @@ enum State {IDLE, MOVE, CARRYING, THROWING, STUNNED, DEAD, SPAWN}
 @export var FRICTION = 500
 @export var MAX_SPEED = 300
 @export var ACCELERATION = 1500
+@onready var MOVE_SOUND = $steps
 
 # PICKING_UP
 # Get position of 
@@ -132,6 +133,7 @@ func move(delta):
 		apply_movement(axis * ACCELERATION * delta)
 		
 	move_and_slide()
+	MOVE_SOUND.play()
 
 func get_input_axis():
 

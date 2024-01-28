@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ct72stj7nl8gt" path="res://Player/icon.svg" id="2_optjj"]
 [ext_resource type="Script" path="res://Enemies/Enemy.gd" id="2_vrnss"]
 [ext_resource type="Texture2D" uid="uid://c5svkujfs4rsw" path="res://Enemies/Bull/Bull-run.png" id="3_tcc0s"]
+[ext_resource type="AudioStream" uid="uid://d06byv2nj3lny" path="res://Sound/bull.mp3" id="4_yd253"]
 [ext_resource type="Texture2D" uid="uid://c4bgsvkvbjvav" path="res://Enemies/Bull/Bull-sit.png" id="4_pdogv"]
 [ext_resource type="Texture2D" uid="uid://0msgakg5a6sb" path="res://Enemies/Bull/Bull-stun.png" id="5_6lj5g"]
 
@@ -11,19 +12,11 @@
 blend_mode = 3
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2t0cb"]
-radius = 34.0
-height = 182.0
+radius = 11.1718
+height = 110.743
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_03tmy"]
-radius = 96.5817
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1vhei"]
-shader = ExtResource("2_opp5o")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 8.282
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
+radius = 77.0584
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4ypew"]
 animations = [{
@@ -79,7 +72,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_bntuj"]
 resource_name = "Run"
-length = 0.333334
+length = 1.44445
 loop_mode = 1
 step = 0.0111111
 tracks/0/type = "bezier"
@@ -134,9 +127,16 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qrgug"]
 _data = {
 "RESET": SubResource("Animation_ctdeh"),
-"Run": SubResource("Animation_bntuj"),
-"Spawn": SubResource("Animation_n2vql")
+"Run": SubResource("Animation_bntuj")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1vhei"]
+shader = ExtResource("2_opp5o")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 5.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("2_vrnss")
@@ -173,5 +173,13 @@ libraries = {
 "": SubResource("AnimationLibrary_qrgug")
 }
 autoplay = "Run"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_1vhei")
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_tcc0s")
+
+[node name="bull_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_yd253")
 
 [connection signal="area_entered" from="BananaSensorArea2D" to="." method="_on_banana_sensor_area_2d_area_entered"]

@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-enum State {IDLE, PREPARE_TO_ATTACK, FOLLOW, SLIP, DEAD, STOP, BOUNCE, SPAWN}
+enum State {IDLE, PREPARE_TO_ATTACK, FOLLOW, SLIP, DEAD, STOP, BOUNCE}
 
 # Declare member variables here. Break down per state
 # IDLE
@@ -27,7 +27,7 @@ var bounce_time = 2.0
 var state_transition : bool = true
 var current_time: float = 0.0
 var target_time: float = 0.0
-var state = State.SPAWN # start state
+var state = State.IDLE # start state
 var direction = Vector2() # direction to player
 var cur_speed = Vector2() # current speed
 
@@ -44,14 +44,14 @@ func _ready():
 	if player == null:
 		print("Player not found")
 		return
+	# If unset, set target time
+	if target_time < current_time:
+		target_time = current_time + idle_time
+		state = State.IDLE
 
 	state_transition = true
 	var current_time: float = 0.0
 	var target_time: float = 0.0
-	var state = State.SPAWN # start state
-
-	# dissable collision 
-	$CollisionShape2D.disabled = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -66,8 +66,6 @@ func _process(delta):
 
 	
 	match state:
-		State.SPAWN:
-			spawn()
 		State.IDLE:
 			pass
 			idle()
@@ -78,7 +76,7 @@ func _process(delta):
 		State.DEAD:
 			die()
 		State.BOUNCE:
-			bounce(delta)
+			pass
 			
 		State.SLIP:
 			slip(delta)
@@ -99,12 +97,12 @@ func idle():
 
 	# Transition OUT
 	if current_time > target_time:
-		
 		state_transition = true
 		state = State.PREPARE_TO_ATTACK	
 
+	
 
-func spawn():
+func player_hit():
 	# Transition IN
 	if state_transition:
 		state_transition = false
@@ -121,7 +119,7 @@ func spawn():
 		animation_player.stop()
 		$CollisionShape2D.disabled = false
 		state_transition = true
-		state = State.IDLE	
+		state = State.IDLE
 
 
 func prepare_to_attack(): 
@@ -154,27 +152,23 @@ func prepare_to_attack():
 		state_transition = true
 		state = State.FOLLOW
 
-func player_hit(player_direction):
-	# Transition IN
-	state_transition = true
-	cur_speed = speed * -player_direction.normalized()/2
-	# Transition OUT
-	state = State.BOUNCE
-
-		
 func bounce(delta):
 	# Transition IN
 	if state_transition:
 		state_transition = false
 		target_time = bounce_time
 		current_time =0.0
-	var percent = current_time / target_time
-	print("Current speed: " + str(cur_speed))
+		direction = -direction.normalized()
+		cur_speed = speed * direction 
 
-	set_velocity(cur_speed * (1.0 - percent))
+	cur_speed = cur_speed * 0.9
+
+		# Move along previous fixed direction
+
+	set_velocity(cur_speed)	
 	move_and_slide()	
-	
-	# Move along previous fixed direction
+
+	# If unset, set target time
 
 	# Transition OUT
 	if target_time < current_time:

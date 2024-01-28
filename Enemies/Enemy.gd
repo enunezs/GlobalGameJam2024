@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-enum State {IDLE, PREPARE_TO_ATTACK, FOLLOW, SLIP, DEAD, STOP, BOUNCE}
+enum State {IDLE, PREPARE_TO_ATTACK, FOLLOW, SLIP, DEAD, STOP, BOUNCE, SPAWN}
 
 # Declare member variables here. Break down per state
 # IDLE
@@ -27,13 +27,13 @@ var bounce_time = 2.0
 var state_transition : bool = true
 var current_time: float = 0.0
 var target_time: float = 0.0
-var state = State.IDLE # start state
+var state = State.SPAWN # start state
 var direction = Vector2() # direction to player
 var cur_speed = Vector2() # current speed
 
 @onready var player = get_tree().get_root().get_node("Node2D/Player")
 
-@onready var animation_player = $AnimatedSprite2D
+@onready var animation_player = $Sprite2D/AnimationPlayer
 
 
 # Called when the node enters the scene tree for the first time.
@@ -43,14 +43,14 @@ func _ready():
 	if player == null:
 		print("Player not found")
 		return
-	# If unset, set target time
-	if target_time < current_time:
-		target_time = current_time + idle_time
-		state = State.IDLE
 
 	state_transition = true
 	var current_time: float = 0.0
 	var target_time: float = 0.0
+	var state = State.SPAWN # start state
+
+	# dissable collision 
+	$CollisionShape2D.disabled = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -65,8 +65,11 @@ func _process(delta):
 
 	
 	match state:
+		State.SPAWN:
+			spawn()
 		State.IDLE:
-			idle()
+			pass
+			#idle()
 		State.PREPARE_TO_ATTACK:
 			prepare_to_attack()
 		State.FOLLOW:
@@ -93,10 +96,40 @@ func idle():
 
 	# Transition OUT
 	if current_time > target_time:
+		
 		state_transition = true
 		state = State.PREPARE_TO_ATTACK	
 
+
+func spawn():
+	# Transition IN
+	if state_transition:
+		state_transition = false
+		# Get idle animation length
+
+		# get animation duration
+		target_time = animation_player.get_animation("Spawn").length
+		#animation_player.set_animation_process_mode(AnimationPlayer.ANIMATION_PROCESS_FIXED)
+		current_time = 0.0
+		#animation_player.
 	
+		# Play drop in animation
+		animation_player.play("Spawn")
+ 
+
+
+	# Play idle animation
+	pass
+	
+	# If time is up, switch to prepare
+
+	# Transition OUT
+	if current_time > target_time:
+		animation_player.play("Run")
+		animation_player.stop()
+		$CollisionShape2D.disabled = false
+		state_transition = true
+		state = State.IDLE	
 
 
 func prepare_to_attack(): 
@@ -219,3 +252,5 @@ func _on_banana_sensor_area_2d_area_entered(area):
 
 	if area.is_in_group("Scenario"):
 		state = State.DEAD
+
+ 

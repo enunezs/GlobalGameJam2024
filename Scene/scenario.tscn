@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://g48dupwm2ofx"]
+[gd_scene load_steps=6 format=3 uid="uid://bdruj37nppf2s"]
 
 [ext_resource type="Texture2D" uid="uid://upm30ip6smd3" path="res://Scene/background_temporary.png" id="1_8oqwo"]
 [ext_resource type="PackedScene" uid="uid://cwqkxnj1ajr43" path="res://Player/Player.tscn" id="1_gvg3c"]
-[ext_resource type="PackedScene" uid="uid://eabsopjdxkdo" path="res://Enemies/Enemy.tscn" id="4_lm6e7"]
+[ext_resource type="PackedScene" uid="uid://bx7uhay617455" path="res://Enemies/Enemy.tscn" id="4_lm6e7"]
 [ext_resource type="PackedScene" uid="uid://dccmqlsjva73h" path="res://Items/banana.tscn" id="4_n4q1k"]
 [ext_resource type="Script" path="res://Spawner/Spawner.gd" id="5_m86nx"]
 [ext_resource type="AudioStream" uid="uid://ber47nvnur5mw" path="res://Sound/PayasoDeRodeo.mp3" id="6_60yx5"]

@@ -2,7 +2,7 @@ extends CharacterBody2D
 # This is the base class for all characters in the game.
 
 # Base states
-enum State {IDLE, MOVE, CARRYING, THROWING, STUNNED, DEAD}
+enum State {IDLE, MOVE, CARRYING, THROWING, STUNNED, DEAD, SPAWN}
 # TODO Removed for now. Will add back in later
 #PICKING_UP
 
@@ -59,7 +59,7 @@ func _ready():
 		print("Animation player not found")
 		return
 
-	state = State.MOVE
+	state = State.SPAWN
 	state_transition = true
 
 
@@ -73,8 +73,11 @@ func _physics_process(delta):
 	#print("Current time: " + str(_current_time))
 	#print("Target time: " + str(_target_time))
 
-	
 	match state:
+
+		State.SPAWN:
+			spawn()
+
 		State.MOVE:
 			move(delta)
 
@@ -92,6 +95,26 @@ func _physics_process(delta):
 	update_animation() 
 
 	
+### State: SPAWN
+func spawn():
+	if state_transition:
+		state_transition = false
+		
+		# get animation duration
+		_target_time = animation_player.get_animation("Spawn").length
+		_current_time = 0.0
+		#animation_player.
+	
+		# Play drop in animation
+		animation_player.play("Spawn")
+
+		
+
+	if _target_time < _current_time:
+		state = State.MOVE
+		state_transition = true
+
+
 ### State: MOVE
 func move(delta):
 	if state_transition:
@@ -125,7 +148,6 @@ func apply_friction(amount):
 func apply_movement(accel):
 	velocity += accel
 	velocity = velocity.limit_length(MAX_SPEED)
-
 
 ### State: CARRYING
 func pick_up():

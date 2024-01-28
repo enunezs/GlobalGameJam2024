@@ -6,8 +6,8 @@
 [ext_resource type="Shader" path="res://Outline.gdshader" id="2_swwg2"]
 [ext_resource type="Texture2D" uid="uid://ciumek4o0qi8p" path="res://Player/Assets/Clown-hold.png" id="4_vyv80"]
 [ext_resource type="Texture2D" uid="uid://cfd08xedv6tmu" path="res://Player/Assets/Clown-idle.png" id="5_c4ryl"]
-[ext_resource type="Animation" uid="uid://b5n45l2crj37d" path="res://Spawn.res" id="5_ijd4e"]
-[ext_resource type="AudioStream" uid="uid://cdjuy56roen5x" path="res://Sound/steps.mp3" id="6_a2jql"]
+[ext_resource type="Animation" path="res://Spawn.res" id="5_ijd4e"]
+[ext_resource type="AudioStream" uid="uid://dga62gdwjnmid" path="res://Sound/steps.mp3" id="6_a2jql"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6i2g8"]
 blend_mode = 2
@@ -61,6 +61,23 @@ animations = [{
 "name": &"Slide",
 "speed": 5.0
 }]
+
+[sub_resource type="Animation" id="Animation_ga62w"]
+resource_name = "Idle"
+length = 1.00001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.171927, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0523599, -0.0523599]
+}
 
 [sub_resource type="Animation" id="Animation_ujqom"]
 length = 0.001
@@ -206,23 +223,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [true, true, true, true]
-}
-
-[sub_resource type="Animation" id="Animation_ga62w"]
-resource_name = "Idle"
-length = 1.00001
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 0
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.171927, 0.6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0523599, -0.0523599]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0leyj"]

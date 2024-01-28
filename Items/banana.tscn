@@ -1,13 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://dccmqlsjva73h"]
+[gd_scene load_steps=10 format=3 uid="uid://dccmqlsjva73h"]
 
 [ext_resource type="Script" path="res://Items/Banana.gd" id="1_rqrue"]
-[ext_resource type="Texture2D" uid="uid://bbywgphxgea6u" path="res://Scene/Effects/Shadow-banana.png" id="2_2isq2"]
 [ext_resource type="Texture2D" uid="uid://bv0okeb42r02w" path="res://Items/Banana/banana_peel.png" id="2_wb7dw"]
 [ext_resource type="Texture2D" uid="uid://upl8soyvdmsf" path="res://Items/Banana/Banana-peel.png" id="3_qvhwq"]
 [ext_resource type="Texture2D" uid="uid://trdbc3wp3pok" path="res://Items/Banana/Banana.png" id="4_yo6a7"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5cctt"]
-blend_mode = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ktb51"]
 radius = 182.011
@@ -114,12 +110,6 @@ _data = {
 [node name="Banana" type="CharacterBody2D" groups=["Item"]]
 scale = Vector2(2, 2)
 script = ExtResource("1_rqrue")
-
-[node name="ShadowSprite2D" type="Sprite2D" parent="."]
-material = SubResource("CanvasItemMaterial_5cctt")
-position = Vector2(-13.7675, -33.875)
-scale = Vector2(0.214946, 0.16602)
-texture = ExtResource("2_2isq2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false

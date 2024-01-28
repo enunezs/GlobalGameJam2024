@@ -262,11 +262,11 @@ func update_animation():
 
 	elif state == State.IDLE:
 		animated_sprite.play("Sit")
-		animation_player.play("Run")
+		#animation_player.play("Run")
 
 	elif state == State.SLIP:
 		animated_sprite.play("Sit")
-		animation_player.play("Run")
+		#animation_player.play("Run")
 
 	elif state == State.BOUNCE:
 		animated_sprite.play("Stun")

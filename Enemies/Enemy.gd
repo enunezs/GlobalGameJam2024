@@ -26,6 +26,7 @@ var bounce_time = 2.0
 
 # HIT
 @onready var ENEMY_HIT = $enemy_hit_sound
+@onready var ENEMY_RUN = $bull_sound	
 
 # Member variables
 var state_transition : bool = true
@@ -188,6 +189,8 @@ func follow(delta):
 
 		direction = direction.normalized()
 		cur_speed = speed * direction
+		# play bull sound
+		ENEMY_RUN.play(	)
 
 	# Move along previous fixed direction
 	#direction = direction.normalized()

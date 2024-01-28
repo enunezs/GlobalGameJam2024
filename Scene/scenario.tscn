@@ -265,13 +265,13 @@ stun_velocity = 150.0
 script = ExtResource("5_m86nx")
 spawn_target = ExtResource("4_lm6e7")
 spawn_interval = 0.1
-spawn_limit = 10
+spawn_limit = 100
 
 [node name="BananaSpawner" type="Node2D" parent="."]
 script = ExtResource("5_m86nx")
 spawn_target = ExtResource("4_n4q1k")
 spawn_interval = 0.1
-spawn_limit = 10
+spawn_limit = 100
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_6b0it")

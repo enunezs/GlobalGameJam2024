@@ -1,62 +1,243 @@
-[gd_scene load_steps=15 format=3 uid="uid://bdruj37nppf2s"]
+[gd_scene load_steps=17 format=3 uid="uid://bdruj37nppf2s"]
 
 [ext_resource type="PackedScene" uid="uid://cwqkxnj1ajr43" path="res://Player/Player.tscn" id="1_gvg3c"]
 [ext_resource type="Shader" path="res://Screentone.gdshader" id="1_yxtlx"]
+[ext_resource type="Texture2D" uid="uid://b2wwuqhb8o5ut" path="res://Scene/water.png" id="2_wmsvg"]
 [ext_resource type="PackedScene" uid="uid://bx7uhay617455" path="res://Enemies/Enemy.tscn" id="4_lm6e7"]
 [ext_resource type="PackedScene" uid="uid://dccmqlsjva73h" path="res://Items/banana.tscn" id="4_n4q1k"]
 [ext_resource type="Script" path="res://Spawner/Spawner.gd" id="5_m86nx"]
+[ext_resource type="Texture2D" uid="uid://bcj32n2pmcuhe" path="res://Scene/stairs-1.png" id="5_ni207"]
 [ext_resource type="Texture2D" uid="uid://b2orru0gvqnrb" path="res://Scene/floor.png" id="7_1la2c"]
 [ext_resource type="AudioStream" uid="uid://ber47nvnur5mw" path="res://Sound/PayasoDeRodeo.mp3" id="7_6b0it"]
-[ext_resource type="Script" path="res://Scene/Label.gd" id="8_kwhw1"]
+[ext_resource type="Texture2D" uid="uid://6eqsldla2yau" path="res://Scene/stairs-2.png" id="9_uu5ap"]
+[ext_resource type="Texture2D" uid="uid://c25d5ht3b5hug" path="res://Scene/stairs-3.png" id="10_j774m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8bbgh"]
 shader = ExtResource("1_yxtlx")
 shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/radius = 0.574
+shader_parameter/radius = 0.0
 shader_parameter/center = Vector2(0.5, 0.5)
-shader_parameter/grid_size = Vector2(55.825, 30)
+shader_parameter/grid_size = Vector2(40.7793, 30)
+shader_parameter/offset = Vector2(0.175, 0)
 
 [sub_resource type="Animation" id="Animation_f82gp"]
 resource_name = "Background"
+length = 5.0
+loop_mode = 1
+step = 5.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Water:material:shader_parameter/radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.5, -0.25, 0, 1.06619, 0.000682771, 0.5, -1.36946, 0.159416, 0.214593, -0.0137553),
+"times": PackedFloat32Array(0.0419857, 4.79395)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Water:material:shader_parameter/offset:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 1.35561, 1.12428, 0, -1.39314, -0.644467, 0.25, 0),
+"times": PackedFloat32Array(0.0203761, 4.91018)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Water:material:shader_parameter/offset:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.812665, -0.395029, 0, -1.53166, 0.716107, 0.25, 0),
+"times": PackedFloat32Array(-0.0184697, 4.91018)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Base:material:shader_parameter/radius")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.4, -0.25, 0, 2.58603, 0.148439, 0.4, -2.45091, 0.00362504, 0.25, 0),
+"times": PackedFloat32Array(0, 5)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Base:material:shader_parameter/offset:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 1.93931, -0.5182, -1, -1.90238, 0.560084, 0.25, 0),
+"times": PackedFloat32Array(-0.0366671, 5)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Base:material:shader_parameter/offset:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(-0.0366671)
+}
+
+[sub_resource type="Animation" id="Animation_y0cgs"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Water:material:shader_parameter/center:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Water:material:shader_parameter/center:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Water:material:shader_parameter/radius")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Water:material:shader_parameter/offset:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.175, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Water:material:shader_parameter/offset:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Base:material:shader_parameter/radius")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Base:material:shader_parameter/offset:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Base:material:shader_parameter/offset:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5ohp3"]
 _data = {
-"Background": SubResource("Animation_f82gp")
+"Background": SubResource("Animation_f82gp"),
+"RESET": SubResource("Animation_y0cgs")
 }
 
-[sub_resource type="SystemFont" id="SystemFont_ucuut"]
-
-[sub_resource type="Theme" id="Theme_uwvrh"]
-default_font = SubResource("SystemFont_ucuut")
-default_font_size = 22
-
-[sub_resource type="Theme" id="Theme_7drr6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_boa5p"]
+shader = ExtResource("1_yxtlx")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/radius = 0.0
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/grid_size = Vector2(40, 20)
+shader_parameter/offset = Vector2(0, 0)
 
 [node name="Node2D" type="Node2D" groups=["Scenario"]]
 
 [node name="DeathZone" type="Area2D" parent="." groups=["Scenario"]]
 scale = Vector2(1.67, 1.67)
 
-[node name="Ground" type="Sprite2D" parent="DeathZone"]
-visible = false
+[node name="Water" type="Sprite2D" parent="DeathZone"]
+z_index = -2
 material = SubResource("ShaderMaterial_8bbgh")
 position = Vector2(575, 322)
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("7_1la2c")
+texture = ExtResource("2_wmsvg")
+
+[node name="Stairs-3" type="Sprite2D" parent="DeathZone"]
+position = Vector2(573.054, 320.958)
+scale = Vector2(0.598802, 0.598802)
+texture = ExtResource("10_j774m")
+
+[node name="Stairs-2" type="Sprite2D" parent="DeathZone"]
+position = Vector2(573.054, 319.162)
+scale = Vector2(0.598802, 0.598802)
+texture = ExtResource("9_uu5ap")
+
+[node name="Stairs-1" type="Sprite2D" parent="DeathZone"]
+position = Vector2(574.85, 319.162)
+scale = Vector2(0.598802, 0.598802)
+texture = ExtResource("5_ni207")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DeathZone" groups=["Scenario"]]
-polygon = PackedVector2Array(364.072, 538.922, 999.401, 531.138, 1043.11, 468.263, 1017.37, 377.246, 1050.9, 267.066, 993.413, 216.168, 904.192, 207.186, 682.635, 210.18, 461.677, 196.407, 195.21, 214.371, 139.521, 232.335, 139.521, 279.641, 146.707, 326.347, 140.719, 480.24, 190.419, 523.952)
-
-[node name="Water" type="Sprite2D" parent="DeathZone"]
-material = SubResource("ShaderMaterial_8bbgh")
-position = Vector2(574, 322)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("7_1la2c")
+polygon = PackedVector2Array(545.509, 517.365, 867.066, 525.748, 998.204, 522.754, 1031.14, 462.874, 1005.39, 371.856, 1038.32, 277.844, 986.826, 223.952, 904.192, 207.186, 686.228, 214.97, 461.078, 203.593, 229.341, 216.766, 174.85, 219.76, 146.108, 252.695, 158.084, 307.186, 155.689, 402.395, 149.701, 476.647, 171.257, 504.192, 211.976, 521.557, 350.299, 528.742)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="DeathZone"]
 libraries = {
 "": SubResource("AnimationLibrary_5ohp3")
 }
+autoplay = "Background"
+
+[node name="Base" type="Sprite2D" parent="DeathZone"]
+material = SubResource("ShaderMaterial_boa5p")
+position = Vector2(574, 322)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("7_1la2c")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["Scenario"]]
 visible = false
@@ -65,7 +246,7 @@ visible = false
 visible = false
 
 [node name="Banana" parent="." instance=ExtResource("4_n4q1k")]
-position = Vector2(1075, 327)
+position = Vector2(952, 567)
 
 [node name="Player" parent="." instance=ExtResource("1_gvg3c")]
 position = Vector2(595, 424)

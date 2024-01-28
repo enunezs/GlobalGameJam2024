@@ -16,7 +16,7 @@ blend_mode = 2
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_axuq2"]
 radius = 116.0
-height = 448.0
+height = 360.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fsp3i"]
 radius = 98.326
@@ -185,6 +185,30 @@ tracks/8/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath(".:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.4, 0.4)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath(".:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-10, -30)]
+}
 
 [sub_resource type="Animation" id="Animation_tr5mu"]
 resource_name = "Run"
@@ -227,8 +251,37 @@ tracks/2/keys = {
 "values": [true, true, true, true]
 }
 
+[sub_resource type="Animation" id="Animation_mhym5"]
+resource_name = "Fall"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.960423),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.4, 0.4), Vector2(0.2, 0.2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.988127),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-10, -30), Vector2(-10, 200)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0leyj"]
 _data = {
+"Fall": SubResource("Animation_mhym5"),
 "Idle": SubResource("Animation_ga62w"),
 "RESET": SubResource("Animation_ujqom"),
 "Run": SubResource("Animation_tr5mu"),
@@ -246,7 +299,7 @@ scale = Vector2(0.341463, 0.341463)
 texture = ExtResource("2_diqrt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -26)
+position = Vector2(0, 36)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CapsuleShape2D_axuq2")
 
@@ -254,6 +307,7 @@ shape = SubResource("CapsuleShape2D_axuq2")
 position = Vector2(12, -162)
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 62)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -36)
@@ -282,8 +336,10 @@ stream = ExtResource("6_a2jql")
 wait_time = 0.3
 
 [node name="gunshot" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("9_2mo1s")
-volume_db = 3.971
+stream = ExtResource("6_a2jql")
+
+[node name="gunshot2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_a2jql")
 
 [node name="fall" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_77srw")

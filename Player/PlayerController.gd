@@ -272,8 +272,29 @@ func stunned(delta):
 		state_transition = true
 	
 func die():
-	hit.emit()
-	queue_free()
+	# Play animation, wait till its done
+
+	if state_transition:
+		state_transition = false
+		velocity = Vector2.ZERO
+		_current_time = 0.0
+		_target_time = animation_player.get_animation("Fall").length
+
+		animation_player.play("Fall")
+
+		# if the player is on the upper half of the screen, change z order to put them behind the ground
+		if global_position.y < 500:
+			z_index = -1
+		
+		
+	if _target_time < _current_time:
+		state = State.MOVE
+		state_transition = true
+
+		hit.emit()
+		queue_free()
+
+		# game over
 
 func update_animation():
 	# flip sprite
@@ -294,7 +315,8 @@ func _on_area_2d_area_entered(area):
 func _on_area_2d_area_exited(area):
 	if area.is_in_group("Scenario") and not state == State.SPAWN:
 		state = State.DEAD
-		FALL.play()
+		state_transition = true
+
 		
 # Check for enemies
 func _on_area_2d_body_entered(body):

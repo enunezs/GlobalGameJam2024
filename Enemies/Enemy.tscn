@@ -166,7 +166,7 @@ material = SubResource("ShaderMaterial_1vhei")
 position = Vector2(-10, -30)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_4ypew")
-animation = &"Sit"
+animation = &"Stun"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
 root_node = NodePath("../..")

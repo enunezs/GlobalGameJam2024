@@ -102,7 +102,7 @@ func idle():
 
 	
 
-func player_hit():
+func player_hit(dir):
 	# Transition IN
 	if state_transition:
 		state_transition = false
@@ -111,6 +111,7 @@ func player_hit():
 		target_time = animation_player.get_animation("Spawn").length *0.9
 		current_time = 0.0
 		#animation_player.set_animation_process_mode(AnimationPlayer.ANIMATION_PROCESS_FIXED)
+		#direction = dir.normalized()
 		
 	# If time is up, switch to prepare
 

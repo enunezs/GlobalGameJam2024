@@ -1,22 +1,25 @@
-[gd_scene load_steps=16 format=3 uid="uid://bx7uhay617455"]
+[gd_scene load_steps=14 format=3 uid="uid://bx7uhay617455"]
 
 [ext_resource type="Shader" path="res://Outline.gdshader" id="2_opp5o"]
-[ext_resource type="Texture2D" uid="uid://ct72stj7nl8gt" path="res://Player/icon.svg" id="2_optjj"]
 [ext_resource type="Script" path="res://Enemies/Enemy.gd" id="2_vrnss"]
 [ext_resource type="Texture2D" uid="uid://c5svkujfs4rsw" path="res://Enemies/Bull/Bull-run.png" id="3_tcc0s"]
-[ext_resource type="AudioStream" uid="uid://d06byv2nj3lny" path="res://Sound/bull.mp3" id="4_yd253"]
 [ext_resource type="Texture2D" uid="uid://c4bgsvkvbjvav" path="res://Enemies/Bull/Bull-sit.png" id="4_pdogv"]
 [ext_resource type="Texture2D" uid="uid://0msgakg5a6sb" path="res://Enemies/Bull/Bull-stun.png" id="5_6lj5g"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bfih5"]
-blend_mode = 3
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2t0cb"]
-radius = 11.1718
-height = 110.743
+radius = 34.0
+height = 182.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_03tmy"]
-radius = 77.0584
+radius = 96.5817
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1vhei"]
+shader = ExtResource("2_opp5o")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 8.282
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4ypew"]
 animations = [{
@@ -72,7 +75,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_bntuj"]
 resource_name = "Run"
-length = 1.44445
+length = 0.333334
 loop_mode = 1
 step = 0.0111111
 tracks/0/type = "bezier"
@@ -127,25 +130,12 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qrgug"]
 _data = {
 "RESET": SubResource("Animation_ctdeh"),
-"Run": SubResource("Animation_bntuj")
+"Run": SubResource("Animation_bntuj"),
+"Spawn": SubResource("Animation_n2vql")
 }
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1vhei"]
-shader = ExtResource("2_opp5o")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 5.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("2_vrnss")
-
-[node name="ShadowSprite" type="Sprite2D" parent="."]
-material = SubResource("CanvasItemMaterial_bfih5")
-position = Vector2(0, 64)
-scale = Vector2(1.22759, 0.320001)
-texture = ExtResource("2_optjj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7)
@@ -165,7 +155,7 @@ material = SubResource("ShaderMaterial_1vhei")
 position = Vector2(-10, -30)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_4ypew")
-animation = &"Sit"
+animation = &"Run"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
 root_node = NodePath("../..")
@@ -173,13 +163,5 @@ libraries = {
 "": SubResource("AnimationLibrary_qrgug")
 }
 autoplay = "Run"
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_1vhei")
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("3_tcc0s")
-
-[node name="bull_sound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_yd253")
 
 [connection signal="area_entered" from="BananaSensorArea2D" to="." method="_on_banana_sensor_area_2d_area_entered"]

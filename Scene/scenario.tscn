@@ -1,10 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://g48dupwm2ofx"]
+[gd_scene load_steps=8 format=3 uid="uid://bdruj37nppf2s"]
 
 [ext_resource type="Texture2D" uid="uid://upm30ip6smd3" path="res://Scene/background_temporary.png" id="1_8oqwo"]
 [ext_resource type="PackedScene" uid="uid://cwqkxnj1ajr43" path="res://Player/Player.tscn" id="1_gvg3c"]
-[ext_resource type="PackedScene" uid="uid://eabsopjdxkdo" path="res://Enemies/Enemy.tscn" id="4_lm6e7"]
+[ext_resource type="Shader" path="res://Screentone.gdshader" id="1_yxtlx"]
+[ext_resource type="PackedScene" uid="uid://bx7uhay617455" path="res://Enemies/Enemy.tscn" id="4_lm6e7"]
 [ext_resource type="PackedScene" uid="uid://dccmqlsjva73h" path="res://Items/banana.tscn" id="4_n4q1k"]
 [ext_resource type="Script" path="res://Spawner/Spawner.gd" id="5_m86nx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8bbgh"]
+shader = ExtResource("1_yxtlx")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/radius = 0.485
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/grid_size = Vector2(30, 30)
 
 [node name="Node2D" type="Node2D" groups=["Scenario"]]
 
@@ -16,6 +24,7 @@ visible = false
 polygon = PackedVector2Array(584, 574, 769, 550, 896, 456, 976, 376, 951, 244, 850, 128, 662, 75, 411, 83, 241, 182, 174, 325, 214, 424, 310, 522, 458, 572, 564, 572, 566, 626, 70, 628, 55, 14, 1092, 17, 1089, 599, 574, 633)
 
 [node name="BackgroundSprite2D" type="Sprite2D" parent="DeathZone"]
+material = SubResource("ShaderMaterial_8bbgh")
 position = Vector2(575.5, 325.099)
 scale = Vector2(0.261748, 0.260081)
 texture = ExtResource("1_8oqwo")

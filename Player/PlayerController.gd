@@ -258,7 +258,7 @@ func update_animation():
 	if velocity.x != 0:
 		animated_sprite.flip_h = velocity.x < 0
 
-	if state_transition:
+	if not state_transition:
 		return
 	if state == State.MOVE:
 		animated_sprite.play("Run")

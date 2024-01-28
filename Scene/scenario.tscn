@@ -11,9 +11,9 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8bbgh"]
 shader = ExtResource("1_yxtlx")
 shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/radius = 0.635
+shader_parameter/radius = 0.574
 shader_parameter/center = Vector2(0.5, 0.5)
-shader_parameter/grid_size = Vector2(40, 30)
+shader_parameter/grid_size = Vector2(55.825, 30)
 
 [node name="Node2D" type="Node2D" groups=["Scenario"]]
 

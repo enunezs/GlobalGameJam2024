@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bx7uhay617455" path="res://Enemies/Enemy.tscn" id="4_lm6e7"]
 [ext_resource type="PackedScene" uid="uid://dccmqlsjva73h" path="res://Items/banana.tscn" id="4_n4q1k"]
 [ext_resource type="Script" path="res://Spawner/Spawner.gd" id="5_m86nx"]
+[ext_resource type="AudioStream" uid="uid://ber47nvnur5mw" path="res://Sound/PayasoDeRodeo.mp3" id="6_60yx5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8bbgh"]
 shader = ExtResource("1_yxtlx")
@@ -50,5 +51,9 @@ spawn_interval = 0.1
 script = ExtResource("5_m86nx")
 spawn_target = ExtResource("4_n4q1k")
 spawn_interval = 0.1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_60yx5")
+autoplay = true
 
 [connection signal="area_entered" from="DeathZone" to="Player" method="_on_area_2d_area_entered"]

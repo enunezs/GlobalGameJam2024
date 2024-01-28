@@ -26,7 +26,6 @@ var bounce_time = 2.0
 
 # HIT
 @onready var ENEMY_HIT = $enemy_hit_sound
-@onready var FALL = $fall
 
 # Member variables
 var state_transition : bool = true
@@ -221,9 +220,23 @@ func slip(delta):
 
 
 func die():
-	hit.emit()
-	queue_free()
-		
+	if state_transition:
+		state_transition = false
+		velocity = Vector2.ZERO
+		current_time = 0.0
+		target_time = animation_player.get_animation("Fall").length
+
+		animation_player.play("Fall")
+
+	# if the player is on the upper half of the screen, change z order to put them behind the ground
+	if global_position.y < 500:
+		z_index = -1
+
+	if target_time < current_time:
+
+		hit.emit()
+		queue_free()
+
 
 ### Collision detection ###
 	
@@ -251,10 +264,9 @@ func _on_banana_sensor_area_2d_area_exited(area):
 		print(node)
 		hit.connect(node._on_enemy_squashed.bind())
 		state = State.DEAD
+		state_transition = true
 		
 		
-	
-
 func update_animation():
 	# flip sprite
 	if velocity.x != 0:

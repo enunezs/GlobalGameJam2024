@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bx7uhay617455"]
+[gd_scene load_steps=19 format=3 uid="uid://bx7uhay617455"]
 
 [ext_resource type="Texture2D" uid="uid://c3jtb0dgxs44r" path="res://Scene/Effects/Shadow-bull.png" id="2_7w8i3"]
 [ext_resource type="Shader" path="res://Outline.gdshader" id="2_opp5o"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c4bgsvkvbjvav" path="res://Enemies/Bull/Bull-sit.png" id="4_pdogv"]
 [ext_resource type="AudioStream" uid="uid://d06byv2nj3lny" path="res://Sound/bull.mp3" id="4_yd253"]
 [ext_resource type="Texture2D" uid="uid://0msgakg5a6sb" path="res://Enemies/Bull/Bull-stun.png" id="5_6lj5g"]
+[ext_resource type="AudioStream" uid="uid://cn8h1fyqei6sy" path="res://Sound/gunshot.mp3" id="8_ea73x"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bfih5"]
 blend_mode = 2
@@ -77,6 +78,30 @@ tracks/1/keys = {
 "points": PackedFloat32Array(-30, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-10, -30)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.3, 0.3)]
+}
 
 [sub_resource type="Animation" id="Animation_bntuj"]
 resource_name = "Run"
@@ -132,8 +157,38 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.0273537, 0.826991, 1.18173, 1.44506)
 }
 
+[sub_resource type="Animation" id="Animation_nciyq"]
+resource_name = "Fall"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-10, -30), Vector2(-10, 80)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.3, 0.3), Vector2(0.15, 0.15)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qrgug"]
 _data = {
+"Fall": SubResource("Animation_nciyq"),
 "RESET": SubResource("Animation_ctdeh"),
 "Run": SubResource("Animation_bntuj"),
 "Spawn": SubResource("Animation_n2vql")
@@ -177,6 +232,9 @@ autoplay = "Run"
 
 [node name="bull_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_yd253")
+
+[node name="enemy_hit_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_ea73x")
 
 [connection signal="area_entered" from="BananaSensorArea2D" to="." method="_on_banana_sensor_area_2d_area_entered"]
 [connection signal="area_exited" from="BananaSensorArea2D" to="." method="_on_banana_sensor_area_2d_area_exited"]

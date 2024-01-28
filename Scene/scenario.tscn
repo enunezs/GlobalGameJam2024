@@ -63,7 +63,7 @@ tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.4, -0.25, 0, 1.66254, 0.631805, 0.4, -1.32426, -0.32556, 0.25, 0),
+"points": PackedFloat32Array(0.4, -0.25, 0, 2.58603, 0.148439, 0.4, -2.45091, 0.00362504, 0.25, 0),
 "times": PackedFloat32Array(0, 5)
 }
 tracks/4/type = "bezier"
@@ -74,7 +74,7 @@ tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 1.96702, 2.80177, 0, -1.72136, 2.69502, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 1.93931, -0.5182, -1, -1.90238, 0.560084, 0.25, 0),
 "times": PackedFloat32Array(-0.0366671, 5)
 }
 tracks/5/type = "bezier"

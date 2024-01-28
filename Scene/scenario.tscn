@@ -1,11 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdruj37nppf2s"]
+[gd_scene load_steps=11 format=3 uid="uid://bdruj37nppf2s"]
 
 [ext_resource type="PackedScene" uid="uid://cwqkxnj1ajr43" path="res://Player/Player.tscn" id="1_gvg3c"]
 [ext_resource type="Shader" path="res://Screentone.gdshader" id="1_yxtlx"]
-[ext_resource type="Texture2D" uid="uid://cuc6bqxnvl1rp" path="res://Scene/Scenario.png" id="2_lr6w1"]
 [ext_resource type="PackedScene" uid="uid://bx7uhay617455" path="res://Enemies/Enemy.tscn" id="4_lm6e7"]
 [ext_resource type="PackedScene" uid="uid://dccmqlsjva73h" path="res://Items/banana.tscn" id="4_n4q1k"]
 [ext_resource type="Script" path="res://Spawner/Spawner.gd" id="5_m86nx"]
+[ext_resource type="Texture2D" uid="uid://b2orru0gvqnrb" path="res://Scene/floor.png" id="7_1la2c"]
 [ext_resource type="AudioStream" uid="uid://ber47nvnur5mw" path="res://Sound/PayasoDeRodeo.mp3" id="7_6b0it"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8bbgh"]
@@ -15,23 +15,45 @@ shader_parameter/radius = 0.574
 shader_parameter/center = Vector2(0.5, 0.5)
 shader_parameter/grid_size = Vector2(55.825, 30)
 
+[sub_resource type="Animation" id="Animation_f82gp"]
+resource_name = "Background"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5ohp3"]
+_data = {
+"Background": SubResource("Animation_f82gp")
+}
+
 [node name="Node2D" type="Node2D" groups=["Scenario"]]
 
 [node name="DeathZone" type="Area2D" parent="." groups=["Scenario"]]
 scale = Vector2(1.67, 1.67)
 
+[node name="Ground" type="Sprite2D" parent="DeathZone"]
+visible = false
+material = SubResource("ShaderMaterial_8bbgh")
+position = Vector2(575, 322)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("7_1la2c")
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DeathZone" groups=["Scenario"]]
 polygon = PackedVector2Array(364.072, 538.922, 999.401, 531.138, 1043.11, 468.263, 1017.37, 377.246, 1050.9, 267.066, 993.413, 216.168, 904.192, 207.186, 682.635, 210.18, 461.677, 196.407, 195.21, 214.371, 139.521, 232.335, 139.521, 279.641, 146.707, 326.347, 140.719, 480.24, 190.419, 523.952)
 
-[node name="BackgroundSprite2D" type="Sprite2D" parent="DeathZone"]
+[node name="Water" type="Sprite2D" parent="DeathZone"]
 material = SubResource("ShaderMaterial_8bbgh")
-position = Vector2(574.638, 321.886)
-scale = Vector2(0.60867, 0.603738)
-texture = ExtResource("2_lr6w1")
+position = Vector2(574, 322)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("7_1la2c")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DeathZone"]
+libraries = {
+"": SubResource("AnimationLibrary_5ohp3")
+}
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["Scenario"]]
+visible = false
 
 [node name="CollisionPolygon2D" type="Area2D" parent="StaticBody2D" groups=["Scenario"]]
+visible = false
 
 [node name="Banana" parent="." instance=ExtResource("4_n4q1k")]
 position = Vector2(1075, 327)

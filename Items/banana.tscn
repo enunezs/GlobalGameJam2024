@@ -122,6 +122,8 @@ _data = {
 [node name="Banana" type="CharacterBody2D" groups=["Item"]]
 scale = Vector2(2, 2)
 script = ExtResource("1_rqrue")
+start_speed = 1000
+BANANA_FRICTION = 800
 
 [node name="ShadowSprite2D" type="Sprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_5cctt")

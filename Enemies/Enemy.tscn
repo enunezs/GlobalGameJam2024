@@ -12,11 +12,11 @@
 blend_mode = 2
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2t0cb"]
-radius = 34.0
-height = 182.0
+radius = 43.0
+height = 166.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_03tmy"]
-radius = 96.5817
+radius = 70.0071
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1vhei"]
 shader = ExtResource("2_opp5o")
@@ -149,7 +149,7 @@ scale = Vector2(0.345029, 0.239468)
 texture = ExtResource("2_7w8i3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 7)
+position = Vector2(-14, 2)
 rotation = 1.57079
 shape = SubResource("CapsuleShape2D_2t0cb")
 

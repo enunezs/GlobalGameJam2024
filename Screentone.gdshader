@@ -18,6 +18,18 @@ void fragment() {
     // Get the original color from the texture
     vec4 original_color = texture(TEXTURE, UV);
 
-    // Apply the pattern only on the non-transparent parts of the texture
-    COLOR = mix(original_color, vec4(1, 1, 1, 1), pattern);
+    // At the pattern position, replace the color with the original color
+    COLOR.r = original_color.r -  pattern*0.5;
+    COLOR.g = original_color.g -  pattern*0.5;
+    COLOR.b = original_color.b -  pattern*0.5;
+
+
+
+
+
+    //COLOR = original_color * pattern;
+
+    //COLOR.a = original_color.a*pattern;
+
+
 }

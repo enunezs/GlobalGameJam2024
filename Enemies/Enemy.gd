@@ -22,7 +22,7 @@ var slip_speed = 300
 
 # BOUNCE
 var bounce_time = 2.0
-
+ 
 # Member variables
 var state_transition : bool = true
 var current_time: float = 0.0
@@ -33,7 +33,8 @@ var cur_speed = Vector2() # current speed
 
 @onready var player = get_tree().get_root().get_node("Node2D/Player")
 
-@onready var animation_player = $Sprite2D/AnimationPlayer
+@onready var animation_player = $AnimatedSprite2D/AnimationPlayer
+@onready var animated_sprite = $AnimatedSprite2D
 
 
 # Called when the node enters the scene tree for the first time.
@@ -55,7 +56,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# print enemy state in text
-	#print("State: " + str(state))
+	print("State: " + str(state))
 	
 	current_time += delta
 
@@ -69,7 +70,7 @@ func _process(delta):
 			spawn()
 		State.IDLE:
 			pass
-			#idle()
+			idle()
 		State.PREPARE_TO_ATTACK:
 			prepare_to_attack()
 		State.FOLLOW:
@@ -81,6 +82,8 @@ func _process(delta):
 			
 		State.SLIP:
 			slip(delta)
+	
+	update_animation()
 
 func idle():
 	# Transtion IN
@@ -105,27 +108,16 @@ func spawn():
 	# Transition IN
 	if state_transition:
 		state_transition = false
-		# Get idle animation length
 
 		# get animation duration
-		target_time = animation_player.get_animation("Spawn").length
-		#animation_player.set_animation_process_mode(AnimationPlayer.ANIMATION_PROCESS_FIXED)
+		target_time = animation_player.get_animation("Spawn").length *0.9
 		current_time = 0.0
-		#animation_player.
-	
-		# Play drop in animation
-		animation_player.play("Spawn")
- 
-
-
-	# Play idle animation
-	pass
-	
+		#animation_player.set_animation_process_mode(AnimationPlayer.ANIMATION_PROCESS_FIXED)
+		
 	# If time is up, switch to prepare
 
 	# Transition OUT
 	if current_time > target_time:
-		animation_player.play("Run")
 		animation_player.stop()
 		$CollisionShape2D.disabled = false
 		state_transition = true
@@ -254,3 +246,42 @@ func _on_banana_sensor_area_2d_area_entered(area):
 		state = State.DEAD
 
  
+
+
+func update_animation():
+	# flip sprite
+	if velocity.x != 0:
+		animated_sprite.flip_h = velocity.x > 0
+
+
+	
+		
+	if state == State.FOLLOW:
+		animated_sprite.play("Run")
+		animation_player.play("Run")
+
+	elif state == State.SPAWN:
+		animation_player.play("Spawn")
+		animated_sprite.play("Sit")
+
+	elif state == State.IDLE:
+		animated_sprite.play("Sit")
+		animation_player.play("Run")
+
+	elif state == State.SLIP:
+		animated_sprite.play("Sit")
+		animation_player.play("Run")
+
+	elif state == State.BOUNCE:
+		animated_sprite.play("Stun")
+
+	elif state == State.PREPARE_TO_ATTACK:
+		animated_sprite.play("Sit")
+
+	elif state == State.DEAD:
+		animated_sprite.play("Sit")
+
+	else:
+		animated_sprite.play("Sit")
+		
+	

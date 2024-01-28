@@ -1,14 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://bx7uhay617455"]
+[gd_scene load_steps=14 format=3 uid="uid://bx7uhay617455"]
 
 [ext_resource type="Shader" path="res://Outline.gdshader" id="2_opp5o"]
-[ext_resource type="Texture2D" uid="uid://ct72stj7nl8gt" path="res://Player/icon.svg" id="2_optjj"]
 [ext_resource type="Script" path="res://Enemies/Enemy.gd" id="2_vrnss"]
 [ext_resource type="Texture2D" uid="uid://c5svkujfs4rsw" path="res://Enemies/Bull/Bull-run.png" id="3_tcc0s"]
 [ext_resource type="Texture2D" uid="uid://c4bgsvkvbjvav" path="res://Enemies/Bull/Bull-sit.png" id="4_pdogv"]
 [ext_resource type="Texture2D" uid="uid://0msgakg5a6sb" path="res://Enemies/Bull/Bull-stun.png" id="5_6lj5g"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bfih5"]
-blend_mode = 3
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2t0cb"]
 radius = 34.0
@@ -141,12 +137,6 @@ _data = {
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("2_vrnss")
 
-[node name="ShadowSprite" type="Sprite2D" parent="."]
-material = SubResource("CanvasItemMaterial_bfih5")
-position = Vector2(0, 64)
-scale = Vector2(1.22759, 0.320001)
-texture = ExtResource("2_optjj")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7)
 rotation = 1.57079
@@ -165,7 +155,7 @@ material = SubResource("ShaderMaterial_1vhei")
 position = Vector2(-10, -30)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_4ypew")
-animation = &"Sit"
+animation = &"Run"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
 root_node = NodePath("../..")
